@@ -6,7 +6,11 @@ The **Timeline**-plugin is for [Grav CMS](http://github.com/getgrav/grav), and l
 
 Installing the Timeline-plugin can be done in one of two ways. The GPM (Grav Package Manager) installation method enables you to quickly and easily install the plugin with a simple terminal command, while the manual method enables you to do so via a zip file.
 
-**Note:** The [intl](http://php.net/manual/en/book.intl.php)-extension for PHP must be [installed and enabled](http://php.net/manual/en/intl.installation.php "See especially User Contributed Notes") to use this plugin.
+### Requirements
+
+**This plugin will only work with [Grav v1.6](https://github.com/getgrav/grav/tree/1.6) or higher, as it requires [PHP v7.1](http://php.net/manual/en/migration71.new-features.php) or higher. Dropping this requirement would mean devolving features, which the author is not inclined to do.**
+
+The [intl](http://php.net/manual/en/book.intl.php)-extension for PHP must be [installed and enabled](http://php.net/manual/en/intl.installation.php "See especially User Contributed Notes") to use this plugin.
 
 ### GPM Installation (Preferred)
 
