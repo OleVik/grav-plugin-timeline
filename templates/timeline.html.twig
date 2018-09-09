@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="{{ grav.language.getActive ?: grav.config.site.default_lang }}">
+    <head>
+    {% block stylesheets %}
+        {% do assets.addCss('plugin://timeline/assets/timeline.css') %}
+        {% do assets.addCss('//fonts.googleapis.com/css?family=Roboto') %}
+        {% do assets.addCss('https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css') %}
+        {{ assets.css() }}
+    {% endblock %}
+    </head>
+    <body>
+    {% block timeline %}
+        {% import "macros/timeline.html.twig" as macros %}
+        {% if page.header.truncate is defined %}
+            {% set config_truncate = page.header.truncate %}
+        {% elseif config.plugins['timeline'].truncate is defined %}
+            {% set config_truncate = config.plugins['timeline'].truncate %}
+        {% else %}
+            {% set config_truncate = false %}
+        {% endif %}
+        <div class="container-fluid">
+            <div class="row example-centered">
+                <div class="col-12 example-title">
+                    <h1>{{ page.title }}</h1>
+                    <h2>{{ page.header.subtitle }}</h2>
+                    {{ page.content|truncate_words(config_truncate) }}
+                </div>
+                <div class="col-xs-10 col-xs-offset-1 col-sm-8 offset-sm-2">
+                    {% block timeline_events %}
+                    <ul class="timeline timeline-centered">
+                        {{ macros.timeline_iteration(timeline_content, config_truncate) }}
+                    </ul>
+                    {% endblock %}
+                </div>
+            </div>
+        </div>
+    {% endblock %}
+    {% block scripts %}
+        {{ assets.js() }}
+    {% endblock %}
+    </body>
+</html>

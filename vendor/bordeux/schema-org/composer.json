@@ -1,0 +1,24 @@
+{
+    "name": "bordeux/schema-org",
+    "description": "Schema Org interfaces",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Krzysztof Bednarczyk",
+            "email": "schema@bordeux.net",
+            "homepage": "http://bednarczyk.me"
+        }
+    ],
+    "require": {
+
+    },
+    "autoload": {
+        "psr-4": {
+            "Bordeux\\SchemaOrg\\" : "src"
+        }
+    },
+
+	
+    "scripts": {
+    }
+}

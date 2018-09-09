@@ -1,0 +1,22 @@
+{
+    "name": "olevik/timeline",
+    "description": "Dependencies for Timeline-plugin for Grav",
+    "type": "project",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Ole Vik",
+            "email": "OleVik@users.noreply.github.com"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {
+        "ext-intl": "*",
+        "spatie/schema-org": "^2.0",
+        "symfony/yaml": "^4.1",
+        "symfony/filesystem": "^4.1",
+        "jenssegers/date": "^3.4",
+        "bordeux/schema-org": "^1.0",
+        "phpextra/sorter": "^1.0"
+    }
+}

@@ -1,0 +1,7 @@
+enabled: true
+language: en
+order:
+  by: date
+  dir: asc
+cache: native
+truncate: 100

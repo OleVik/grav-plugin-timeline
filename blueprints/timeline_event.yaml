@@ -1,0 +1,80 @@
+title: Timeline Event
+extends@:
+  - type: default
+    context: blueprints://pages
+
+form:
+  fields:
+    tabs:
+      type: tabs
+      active: 1
+      fields:
+        content:
+          type: tab
+          fields:
+            header.subtitle:
+              type: text
+              style: vertical
+              ordering@: header.title
+              label: PLUGIN_TIMELINE.ADMIN.SUBTITLE
+            header.date:
+              type: datetime
+              style: vertical
+              ordering@: header.subtitle
+              default: ''
+              label: PLUGIN_TIMELINE.ADMIN.DATE
+            header.date_format:
+              type: dateformat
+              style: vertical
+              ordering@: header.date
+              label: PLUGIN_TIMELINE.ADMIN.DATE_FORMAT
+              default: "F Y"
+              options:
+                "Y": Date1
+                "F Y": Date2
+                "d F Y": Date3
+                "F": Date4
+                "d F": Date5
+            header.locale:
+              type: select
+              style: vertical
+              ordering@: header.date_format
+              label: PLUGIN_TIMELINE.ADMIN.LANGUAGE
+              data-default@: '\Grav\Plugin\TimelinePlugin::getActiveLanguage'
+              data-options@: '\Grav\Plugin\TimelinePlugin::getLanguageCodes'
+            header.image:
+              type: filepicker
+              ordering@: header.media_order
+              label: Select a file
+              folder: '@self'
+              preview_images: true
+              accept:
+                - .png
+                - .jpg
+                - .jpeg
+                - .gif
+        options:
+          type: tab
+          fields:
+            eventoptions:
+              type: section
+              title: PLUGIN_TIMELINE.ADMIN.EVENT_OPTIONS
+              underline: true
+            header.type:
+              type: select
+              label: PLUGIN_TIMELINE.ADMIN.TYPE
+              help: PLUGIN_TIMELINE.ADMIN.HELP.TYPE
+              default: Event
+              data-options@: '\Grav\Plugin\TimelinePlugin::getEventTypes'
+            header.place:
+              type: text
+              label: PLUGIN_TIMELINE.ADMIN.PLACE
+              help: PLUGIN_TIMELINE.ADMIN.HELP.PLACE
+            header.locality:
+              type: text
+              label: PLUGIN_TIMELINE.ADMIN.LOCALITY
+              help: PLUGIN_TIMELINE.ADMIN.HELP.LOCALITY
+            header.region:
+              type: text
+              label: PLUGIN_TIMELINE.ADMIN.REGION
+              help: PLUGIN_TIMELINE.ADMIN.HELP.REGION

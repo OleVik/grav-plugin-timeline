@@ -1,0 +1,73 @@
+name: Timeline
+version: 1.0.0
+description: Create and manage timelines in an ordered, hierarchical manner.
+icon: align-center
+author:
+  name: Ole Vik
+  email: git@olevik.net
+homepage: https://github.com/OleVik/grav-plugin-timeline
+keywords: timeline, timelines
+bugs: https://github.com/OleVik/grav-plugin-timeline/issues
+docs: https://github.com/OleVik/grav-plugin-timeline/blob/develop/README.md
+license: MIT
+
+dependencies:
+- { name: grav, version: '>=1.5' }
+
+form:
+  validation: strict
+  fields:
+    enabled:
+      type: toggle
+      label: PLUGIN_ADMIN.PLUGIN_STATUS
+      highlight: 1
+      default: 1
+      options:
+        1: PLUGIN_ADMIN.ENABLED
+        0: PLUGIN_ADMIN.DISABLED
+      validate:
+        type: bool
+    language:
+      type: select
+      label: PLUGIN_TIMELINE.ADMIN.LANGUAGE
+      data-default@: '\Grav\Plugin\TimelinePlugin::getActiveLanguage'
+      data-options@: '\Grav\Plugin\TimelinePlugin::getLanguageCodes'
+    order.by:
+      type: select
+      ordering@: header.subtitle
+      default: date
+      label: PLUGIN_ADMIN.DEFAULT_ORDERING
+      help: PLUGIN_ADMIN.DEFAULT_ORDERING_HELP
+      options:
+        date: PLUGIN_ADMIN.DEFAULT_ORDERING_DATE
+        title: PLUGIN_ADMIN.DEFAULT_ORDERING_TITLE
+        folder: PLUGIN_ADMIN.DEFAULT_ORDERING_FOLDER
+    order.dir:
+      type: select
+      ordering@: header.order.by
+      default: asc
+      label: PLUGIN_ADMIN.DEFAULT_ORDER_DIRECTION
+      help: PLUGIN_ADMIN.DEFAULT_ORDER_DIRECTION_HELP
+      options:
+        asc: PLUGIN_ADMIN.ASCENDING
+        desc: PLUGIN_ADMIN.DESCENDING
+    cache:
+      type: toggle
+      label: PLUGIN_TIMELINE.ADMIN.CACHE
+      help: PLUGIN_TIMELINE.ADMIN.HELP.CACHE
+      description: PLUGIN_TIMELINE.ADMIN.DESCRIPTION.CACHE
+      highlight: native
+      default: native
+      options:
+        native: PLUGIN_TIMELINE.ADMIN.CACHE_OPTIONS.NATIVE
+        persist: PLUGIN_TIMELINE.ADMIN.CACHE_OPTIONS.PERSIST
+        transient: PLUGIN_TIMELINE.ADMIN.CACHE_OPTIONS.TRANSIENT
+        disabled: PLUGIN_TIMELINE.ADMIN.CACHE_OPTIONS.DISABLED
+      validate:
+        type: bool
+    truncate:
+      type: text
+      label: PLUGIN_TIMELINE.ADMIN.TRUNCATE
+      help: PLUGIN_TIMELINE.ADMIN.HELP.TRUNCATE
+      default: 100
+      novalidate: true

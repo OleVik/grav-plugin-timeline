@@ -1,0 +1,40 @@
+title: Timeline
+extends@:
+  type: default
+  context: blueprints://pages
+
+form:
+  fields:
+    tabs:
+      type: tabs
+      active: 1
+      fields:
+        content:
+          type: tab
+          fields:
+            header.subtitle:
+              type: text
+              style: vertical
+              ordering@: header.title
+              label: PLUGIN_TIMELINE.ADMIN.SUBTITLE
+            header.order.by:
+              type: select
+              style: vertical
+              ordering@: header.subtitle
+              data-default@: '\Grav\Plugin\TimelinePlugin::getOrderBy'
+              label: PLUGIN_ADMIN.DEFAULT_ORDERING
+              help: PLUGIN_ADMIN.DEFAULT_ORDERING_HELP
+              options:
+                date: PLUGIN_ADMIN.DEFAULT_ORDERING_DATE
+                title: PLUGIN_ADMIN.DEFAULT_ORDERING_TITLE
+                folder: PLUGIN_ADMIN.DEFAULT_ORDERING_FOLDER
+            header.order.dir:
+              type: select
+              style: vertical
+              ordering@: header.order.by
+              data-default@: '\Grav\Plugin\TimelinePlugin::getOrderDir'
+              label: PLUGIN_ADMIN.DEFAULT_ORDER_DIRECTION
+              help: PLUGIN_ADMIN.DEFAULT_ORDER_DIRECTION_HELP
+              options:
+                asc: PLUGIN_ADMIN.ASCENDING
+                desc: PLUGIN_ADMIN.DESCENDING

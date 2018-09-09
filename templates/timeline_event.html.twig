@@ -1,0 +1,61 @@
+{% extends 'timeline.html.twig' %}
+
+{% block timeline %}
+    <div class="timeline container-fluid">
+        <div class="row example-centered">
+            <div class="col-12 example-title">
+                <a href="{{ page.url }}" class="timeline-title">
+                    <h1>{{ page.title }}</h1>
+                </a>
+                {% if page.header.subtitle is not empty %}
+                    <h2>{{ page.header.subtitle }}</h2>
+                {% endif %}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-10 offset-md-1">
+                {{ page.content }}
+            </div>
+        </div>
+        <hr />
+        {% set siblings = page.parent.children.order(orderBy|default('date'), orderBy|default('asc')) %}
+        <div class="row">
+            <div class="col-5 offset-md-1">
+                {% if siblings.nextSibling(page.path) is not null %}
+                    {% set next = siblings.nextSibling(page.path) %}
+                    <div class="timeline-info">
+                    {% if next.header.locale %}
+                        <span>{{ dt(next.date, next.header.date_format, next.header.locale) }}</span>
+                    {% else %}
+                        <span>{{ dt(next.date, next.header.date_format) }}</span>
+                    {% endif %}
+                    </div>
+                    <a href="{{ next.url }}" class="timeline-title">
+                        <h3>{{ next.title }}</h4>
+                    </a>
+                    {% if next.header.subtitle is not empty %}
+                        <h4 class="timeline-title">{{ next.header.subtitle }}</h4>
+                    {% endif %}
+                {% endif %}
+            </div>
+            <div class="col-5 offset-md-1">
+                {% if siblings.prevSibling(page.path) is not null %}
+                    {% set prev = siblings.prevSibling(page.path) %}
+                    <div class="timeline-info">
+                    {% if prev.header.locale %}
+                        <span>{{ dt(prev.date, prev.header.date_format, prev.header.locale) }}</span>
+                    {% else %}
+                        <span>{{ dt(prev.date, prev.header.date_format) }}</span>
+                    {% endif %}
+                    </div>
+                    <a href="{{ prev.url }}" class="timeline-title">
+                        <h3>{{ prev.title }}</h4>
+                    </a>
+                    {% if prev.header.subtitle is not empty %}
+                        <h4 class="timeline-title">{{ prev.header.subtitle }}</h4>
+                    {% endif %}
+                {% endif %}
+            </div>
+        </div>
+    </div>
+{% endblock %}
