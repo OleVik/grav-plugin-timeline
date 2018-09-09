@@ -1,6 +1,6 @@
 # Timeline Plugin
 
-The **Timeline**-plugin is for [Grav CMS](http://github.com/getgrav/grav), and lets you create and manage timelines in an ordered, hierarchical manner. Timelines can be nested within each other, minutely customized on a page-level, and further customized with your own templates and styles. A [demo is available](https://olevik.me/staging/grav-skeleton-project-space), and demo content can be found in [/pages](https://github.com/OleVik/grav-skeleton-timeline/tree/master/pages).
+The **Timeline**-plugin is for [Grav CMS](http://github.com/getgrav/grav), and lets you create and manage timelines in an ordered, hierarchical manner. Timelines can be nested within each other, minutely customized on a page-level, and further customized with your own templates and styles. A [demo is available](https://olevik.me/staging/grav-skeleton-timeline), and demo content can be found in [/pages](https://github.com/OleVik/grav-skeleton-timeline/tree/master/pages).
 
 ## Installation
 
