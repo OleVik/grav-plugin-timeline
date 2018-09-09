@@ -10,7 +10,13 @@
         }
     ],
     "minimum-stability": "stable",
+    "config": {
+        "preferred-install": {
+            "*": "dist"
+        }
+    },
     "require": {
+        "php": "^7.1",
         "ext-intl": "*",
         "bordeux/schema-org": "^1.0",
         "phpextra/sorter": "^1.0",
