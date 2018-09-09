@@ -9,7 +9,7 @@ use Grav\Common\Page\Header;
 use Grav\Common\Page\Collection;
 use RocketTheme\Toolbox\Event\Event;
 
-require 'vendor/autoload.php';
+require __DIR__ . '/../vendor/autoload.php';
 use PHPExtra\Sorter\Sorter;
 use PHPExtra\Sorter\Strategy\SimpleSortStrategy;
 use PHPExtra\Sorter\Strategy\ComplexSortStrategy;
