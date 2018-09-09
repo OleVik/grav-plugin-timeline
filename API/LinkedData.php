@@ -12,9 +12,6 @@ use RocketTheme\Toolbox\Event\Event;
 
 require __DIR__ . '/../vendor/autoload.php';
 use Spatie\SchemaOrg\Schema;
-use AntoineAugusti\Books\Fetcher;
-use GuzzleHttp\Client;
-use Symfony\Component\Yaml\Yaml;
 
 /**
  * LinkedData API
