@@ -12,9 +12,9 @@
     "minimum-stability": "stable",
     "require": {
         "ext-intl": "*",
-        "spatie/schema-org": "^2.0",
-        "jenssegers/date": "^3.4",
         "bordeux/schema-org": "^1.0",
-        "phpextra/sorter": "^1.0"
+        "phpextra/sorter": "^1.0",
+        "spatie/schema-org": "^2.0",
+        "jenssegers/date": "^3.4"
     }
 }
