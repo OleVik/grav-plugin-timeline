@@ -1,0 +1,6 @@
+.idea
+vendor
+build
+atlassian-ide-plugin.xml
+nbproject
+phpunit.xml
