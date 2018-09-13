@@ -1,5 +1,5 @@
 {
-    "name": "olevik/timeline",
+    "name": "olevik/grav-plugin-timeline",
     "description": "Dependencies for Timeline-plugin for Grav",
     "type": "project",
     "license": "MIT",
