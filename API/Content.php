@@ -96,6 +96,119 @@ class Content
         }
     }
 
+
+    public function buildNodeStructure($data)
+    {
+        $nodes = array();
+        foreach ($data as $key => $value) {
+            $node = array();
+            $node['text']['name'] = $value['header']['title'];
+            if (isset($value['children']) && !empty($value['children'])) {
+                $node['children'] = $this->buildNodeStructure($value['children']);
+            }
+            $nodes[] = $node;
+        }
+        if (!empty($nodes)) {
+            return $nodes;
+        } else {
+            return null;
+        }
+    }
+
+    public static function toObject($array)
+    {
+        $obj = new \stdClass;
+        foreach ($array as $k => $v) {
+            if (strlen($k)) {
+                if (is_array($v)) {
+                    $obj->{$k} = self::toObject($v);
+                } else {
+                    $obj->{$k} = $v;
+                }
+            }
+        }
+        return $obj;
+    } 
+
+    /**
+     * Create page-structure recursively, for use in nodeStructure-data
+     * 
+     * @param string  $route Route to page
+     * @param string  $mode  Placeholder for operation-mode, private.
+     * @param integer $depth Placeholder for recursion depth, private.
+     * 
+     * @return array Page-structure with children and media
+     */
+    public function buildNodeStructure2($route, $mode = false, $depth = 0)
+    {
+        $page = Grav::instance()['page'];
+        $depth++;
+        $mode = '@page.self';
+        if ($depth > 1) {
+            $mode = '@page.children';
+        }
+        $pages = $page->evaluate([$mode => $route]);
+        $pages = $pages->published()->order($this->orderBy, $this->orderDir);
+        $paths = array();
+        foreach ($pages as $page) {
+            $route = $page->rawRoute();
+            $title = $page->title();
+            $paths[$route]['text']['name'] = $title;
+            $header = $page->find($route)->header();
+            $header = $page->toArray($header)['header'];
+            // $date = $page->date();
+            // $datetime = \DateTime::createFromFormat('U', $date);
+            // $date = $datetime->format('Y-m-d H:i:s');
+            // $paths[$route]['datetime'] = $date;
+            if (!empty($paths[$route])) {
+                $children = $this->buildNodeStructure($route, $mode, $depth);
+                if (!empty($children)) {
+                    // if (isset($header['order']['by'], $header['order']['dir'])) {
+                    //     $orderBy = $header['order']['by'];
+                    //     $orderDir = $header['order']['dir'];
+                    //     $children = $this->sortLeaf($children, $orderBy, $orderDir);
+                    // }
+                    $paths[$route]['children'] = $children;
+                }
+            }
+        }
+        if (!empty($paths)) {
+            return $paths;
+        } else {
+            return null;
+        }
+    }
+
+    public function cleanNodeStructure($data)
+    {
+
+    }
+
+    public function stripKeys($data)
+    {
+        // if (isset($data['children'])) {
+        //     $data['children'] = 'asd';
+        //     dump('asd');
+        // } else {
+        //     dump('no asd');
+        // }
+        foreach ($data as $key => $value) {
+            // dump($key);
+            // dump($value);
+            foreach ($value as $key2 => $value2) {
+                // if ($key == 'children') {
+                if ($key2 == 'children') {
+                    dump('asd');
+                    dump($value2);
+                } else {
+                    dump('no asd');
+                }
+            }
+        }
+        // $data = array_values($data);
+        return $data;
+    }
+
     /**
      * Sort array using PHPExtra/Sorter
      *

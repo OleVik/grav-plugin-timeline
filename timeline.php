@@ -123,6 +123,26 @@ class TimelinePlugin extends Plugin
         if ($this->config() && $page->template() == 'timeline') {
             $content = new Content('date', 'asc');
             $tree = $content->buildTree($page->route());
+            dump($tree);
+            $nodeStructure = $content->buildNodeStructure($tree);
+            dump(json_encode($nodeStructure, JSON_PRETTY_PRINT | JSON_FORCE_OBJECT));
+
+            // dump(Content::toObject($nodeStructure));
+            // dump($content->stripKeys($nodeStructure));
+            // $dump = array_walk_recursive($nodeStructure, 'array_values');
+            // dump($dump);
+            // dump(json_decode(json_encode($nodeStructure)));
+            // echo "<pre>";
+            // echo json_encode($nodeStructure, JSON_PRETTY_PRINT | JSON_FORCE_OBJECT);
+            // echo "</pre>";
+            // dump(json_encode($nodeStructure, JSON_PRETTY_PRINT));
+            // var_dump(json_encode($nodeStructure), JSON_PRETTY_PRINT);
+
+            /* 
+            http://fperucic.github.io/treant-js/
+            http://localhost/prosjekter/tidslinje
+            */
+
             $this->grav['twig']->twig_vars['timeline_content'] = $tree;
             $ld = new LinkedData();
             $ld->buildTree($page->route());
