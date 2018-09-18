@@ -22,5 +22,7 @@
         "phpextra/sorter": "^1.0",
         "spatie/schema-org": "^2.0",
         "jenssegers/date": "^3.4"
+    },
+    "require-dev": {
     }
 }

@@ -1,6 +1,14 @@
 <?php
 namespace Timeline;
 
+require __DIR__ . '/vendor/autoload.php';
+use PHPExtra\Sorter\Sorter;
+use PHPExtra\Sorter\Strategy\SimpleSortStrategy;
+use PHPExtra\Sorter\Strategy\ComplexSortStrategy;
+use PHPExtra\Sorter\Comparator\NumericComparator;
+use PHPExtra\Sorter\Comparator\DateTimeComparator;
+use PHPExtra\Sorter\Comparator\UnicodeCIComparator;
+
 /**
  * Utilities for Timeline-plugin
  */
@@ -154,5 +162,59 @@ class Utilities
     
             return 0; // tiebreakers exhausted, so $first == $second
         };
+    }
+
+    /**
+     * Sort array using PHPExtra/Sorter
+     *
+     * @param array  $array    Array to sort.
+     * @param string $orderBy  Property to sort by.
+     * @param string $orderDir Direction to sort.
+     * 
+     * @return array
+     */
+    public function sortLeaf(Array $array, $orderBy = null, $orderDir = null)
+    {
+        if (!$orderBy) {
+            $orderBy = $this->orderBy;
+        }
+        if ($orderBy == 'date') {
+            $orderBy = 'datetime';
+        }
+        if (!$orderDir) {
+            $orderDir = $this->orderDir;
+        }
+        $strategy = new ComplexSortStrategy();
+        if ($orderDir == 'asc') {
+            $strategy->setSortOrder(Sorter::ASC);
+        } elseif ($orderDir == 'desc') {
+            $strategy->setSortOrder(Sorter::DESC);
+        }
+        $strategy->sortBy($orderBy);
+        $strategy->setMaintainKeyAssociation(true);
+        $sorter = new Sorter();
+        return $sorter->setStrategy($strategy)->sort($array);
+    }
+
+    /**
+     * Cast an array into an object, recursively
+     *
+     * @param array $array Array to cast.
+     * 
+     * @return stdClass
+     */
+    public static function toObject($array)
+    {
+        $obj = new \stdClass;
+        foreach ($array as $k => $v) {
+            if (strlen($k)) {
+                if (is_array($v)) {
+                    $obj->{$k} = self::toObject($v);
+                } else {
+                    $obj->{$k} = $v;
+                }
+            }
+        }
+        return $obj;
     }
 }

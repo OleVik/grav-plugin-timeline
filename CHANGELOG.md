@@ -1,3 +1,13 @@
+# v1.1.0
+## xx-xx-2018
+
+1. [](#improved)
+    * Abstracted tree-building from page-context
+    * Moved some methods to Utilities
+2. [](#new)
+    * Added Data-API for UML- and JSON-outputs
+    * Added `dump`-command for Data-API access
+
 # v1.0.2
 ## 13-09-2018
 

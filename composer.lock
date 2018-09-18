@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "98539bd6cb1987f430008907b6bca5aa",
+    "content-hash": "5c3e5a9106684991e1e6207a296a3767",
     "packages": [
         {
             "name": "bordeux/schema-org",
