@@ -1,0 +1,17 @@
+{
+  "name": "modular-scale",
+  "version": "v3.0.5",
+  "main": [
+    "stylesheets/_modularscale.scss"
+  ],
+  "ignore": [
+    "lib",
+    "test-compass",
+    "test-node-sass",
+    "eyeglass-exports.js",
+    "Gemfile",
+    "Gemfile.lock",
+    "modular-scale.gemspec",
+    "sache.json"
+  ]
+}

@@ -4,9 +4,11 @@
 1. [](#improved)
     * Abstracted tree-building from page-context
     * Moved some methods to Utilities
+    * Visual flow in Print-style
 2. [](#new)
     * Added Data-API for UML- and JSON-outputs
     * Added `dump`-command for Data-API access
+    * CSS asset-group 'bottom' for non-render-blocking stylesheets
 
 # v1.0.2
 ## 13-09-2018

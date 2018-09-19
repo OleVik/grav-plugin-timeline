@@ -14,5 +14,8 @@
   "homepage": "https://github.com/OleVik/grav-plugin-timeline#readme",
   "dependencies": {
     "bootstrap": "^4.1.2"
+  },
+  "devDependencies": {
+    "modularscale-sass": "^3.0.5"
   }
 }

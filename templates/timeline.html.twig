@@ -5,7 +5,7 @@
         {% do assets.addCss('plugin://timeline/node_modules/bootstrap/dist/css/bootstrap.min.css') %}
         {% do assets.addCss('plugin://timeline/assets/timeline.css') %}
         {% do assets.addCss('plugin://timeline/assets/timeline.print.css') %}
-        {% do assets.addCss('//fonts.googleapis.com/css?family=Roboto') %}
+        {% do assets.addCss('//fonts.googleapis.com/css?family=Roboto', {'group': 'bottom'}) %}
         {% do assets.addCss('plugin://timeline/node_modules/bootstrap/dist/css/bootstrap.min.css') %}
         {{ assets.css() }}
     {% endblock %}
@@ -40,6 +40,7 @@
     {% endblock %}
     {% block scripts %}
         {{ assets.js() }}
+        {{ assets.css('bottom') }}
     {% endblock %}
     </body>
 </html>
