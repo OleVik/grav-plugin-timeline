@@ -29,7 +29,7 @@ class DumpDataCommand extends ConsoleCommand
     {
         $this
             ->setName("dump")
-            ->setDescription("Generates and stores data-tree.")
+            ->setDescription("Generates and stores data.")
             ->setHelp('The <info>dump</info>-command generates and stores data.')
             ->addArgument(
                 'route',
@@ -39,7 +39,7 @@ class DumpDataCommand extends ConsoleCommand
             ->addArgument(
                 'type',
                 InputArgument::REQUIRED,
-                'The type of data to dump, either nodestructure or uml'
+                'The type of data to dump, either nodestructure, uml or markdown'
             )
             ->addArgument(
                 'target',
@@ -82,6 +82,10 @@ class DumpDataCommand extends ConsoleCommand
             case 'uml':
                 $file = 'timeline.uml';
                 $data = Data::getUMLSyntax($tree);
+                break;
+            case 'markdown':
+                $file = 'timeline.md';
+                $data = Data::getMarkdownOutput($tree);
                 break;
             default:
                 $file = 'timeline.uml';

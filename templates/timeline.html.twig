@@ -28,7 +28,7 @@
                     {{ page.content|truncate_words(config_truncate) }}
                     <hr />
                 </div>
-                <div class="timeline-wrapper col-12 col-sm-10 col-sm-offset-1 col-md-8 offset-md-2">
+                <div class="print timeline-wrapper col-12 col-sm-10 col-sm-offset-1 col-md-8 offset-md-2">
                     {% block timeline_events %}
                     <ul class="timeline timeline-centered">
                         {{ macros.timeline_iteration(timeline_content, config_truncate) }}

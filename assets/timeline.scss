@@ -430,6 +430,7 @@ iframe {
   height: 360px;
 }
 
+/* Print-style: Pure text */
 @media print {
   @page {
     margin: 2cm 1cm;
@@ -482,8 +483,7 @@ iframe {
       display: none !important;
     }
   }
-  iframe,
-  .timeline-marker {
+  iframe {
     display: none !important;
   }
   .timeline-wrapper {
@@ -500,6 +500,9 @@ iframe {
       &.odd,
       &.even,
       &.period {
+        .timeline-marker {
+          display: none !important;
+        }
         .timeline-info {
           display: block;
           width: 15%;
@@ -553,6 +556,48 @@ iframe {
       }
       &.period {
         margin: 1em 0 !important;
+      }
+    }
+  }
+}
+
+/* Print-style: Including graphics */
+@media print {
+  .print.timeline-wrapper {
+    .timeline {
+      .timeline-item {
+        margin: ms(4) 0;
+        padding: 0 !important;
+        text-align: left !important;
+        &.odd,
+        &.even,
+        &.period {
+          .timeline-marker {
+            display: block !important;
+          }
+          .timeline-info {
+            display: block;
+            width: 15%;
+            float: none !important;
+            margin-top: 0 !important;
+            padding-left: 30px !important;
+            text-align: left !important;
+          }
+          .timeline-content {
+            width: calc(100% - 30px);
+            padding-left: 30px !important;
+          }
+          figure[itemprop="image"] {
+            display: block !important;
+            width: calc(100% - 30px);
+            margin-left: 30px !important;
+          }
+        }
+        &.period {
+          .timeline-marker {
+            display: none !important;
+          }
+        }
       }
     }
   }

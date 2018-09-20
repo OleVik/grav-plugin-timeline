@@ -313,6 +313,7 @@ iframe {
   width: 640px;
   height: 360px; }
 
+/* Print-style: Pure text */
 @media print {
   @page {
     margin: 2cm 1cm; }
@@ -351,8 +352,7 @@ iframe {
     content: "" !important; }
   a[rev="footnote"] {
     display: none !important; }
-  iframe,
-  .timeline-marker {
+  iframe {
     display: none !important; }
   .timeline-wrapper {
     width: 95% !important;
@@ -363,6 +363,8 @@ iframe {
     margin: 2.44141em 0;
     padding: 0 !important;
     text-align: left !important; }
+    .timeline .timeline-item.odd .timeline-marker, .timeline .timeline-item.even .timeline-marker, .timeline .timeline-item.period .timeline-marker {
+      display: none !important; }
     .timeline .timeline-item.odd .timeline-info, .timeline .timeline-item.even .timeline-info, .timeline .timeline-item.period .timeline-info {
       display: block;
       width: 15%;
@@ -409,5 +411,30 @@ iframe {
       margin-left: 1em !important; }
     .timeline .timeline-item.period {
       margin: 1em 0 !important; } }
+
+/* Print-style: Including graphics */
+@media print {
+  .print.timeline-wrapper .timeline .timeline-item {
+    margin: 2.44141em 0;
+    padding: 0 !important;
+    text-align: left !important; }
+    .print.timeline-wrapper .timeline .timeline-item.odd .timeline-marker, .print.timeline-wrapper .timeline .timeline-item.even .timeline-marker, .print.timeline-wrapper .timeline .timeline-item.period .timeline-marker {
+      display: block !important; }
+    .print.timeline-wrapper .timeline .timeline-item.odd .timeline-info, .print.timeline-wrapper .timeline .timeline-item.even .timeline-info, .print.timeline-wrapper .timeline .timeline-item.period .timeline-info {
+      display: block;
+      width: 15%;
+      float: none !important;
+      margin-top: 0 !important;
+      padding-left: 30px !important;
+      text-align: left !important; }
+    .print.timeline-wrapper .timeline .timeline-item.odd .timeline-content, .print.timeline-wrapper .timeline .timeline-item.even .timeline-content, .print.timeline-wrapper .timeline .timeline-item.period .timeline-content {
+      width: calc(100% - 30px);
+      padding-left: 30px !important; }
+    .print.timeline-wrapper .timeline .timeline-item.odd figure[itemprop="image"], .print.timeline-wrapper .timeline .timeline-item.even figure[itemprop="image"], .print.timeline-wrapper .timeline .timeline-item.period figure[itemprop="image"] {
+      display: block !important;
+      width: calc(100% - 30px);
+      margin-left: 30px !important; }
+    .print.timeline-wrapper .timeline .timeline-item.period .timeline-marker {
+      display: none !important; } }
 
 /*# sourceMappingURL=timeline.css.map */
