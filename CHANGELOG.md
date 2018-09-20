@@ -5,6 +5,7 @@
     * Abstracted tree-building from page-context
     * Moved some methods to Utilities
     * Visual flow in Print-style
+    * Responsive-styles
 2. [](#new)
     * Added Data-API for UML- and JSON-outputs
     * Added `dump`-command for Data-API access

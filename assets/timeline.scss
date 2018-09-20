@@ -6,6 +6,10 @@ $modularscale: (
   ratio: 1.25
 );
 
+@import '../node_modules/include-media/dist/_include-media';
+// Bootstrap v4.1 Responsive Breakpoints
+$breakpoints: (small: 576px, medium: 768px, large: 992px, extralarge: 1200px);
+
 $primary-color: #ff6b6b;
 $primary-color-hover: scale-color($primary-color, $lightness: 32%);
 
@@ -32,6 +36,10 @@ h6 {
   .subtitle {
     margin: 0.35em 0;
     line-height: 1.2;
+    overflow-wrap: break-word;
+    overflow: visible;
+    word-break: break-word;
+    white-space: normal;
   }
   p {
     margin: 1em auto;
@@ -89,6 +97,12 @@ h6 {
     }
     * {
       max-width: 100%;
+    }
+    .timeline-title {
+      overflow-wrap: break-word;
+      overflow: visible;
+      word-break: break-word;
+      white-space: normal;
     }
   }
   &.odd {
@@ -307,42 +321,8 @@ h6 {
   }
 }
 
-.timeline-split {
-  @media (min-width: 768px) {
-    .timeline {
-      display: table;
-    }
-    .timeline-item {
-      display: table-row;
-      padding: 0;
-    }
-    .timeline-info,
-    .timeline-marker,
-    .timeline-content,
-    .period .timeline-info {
-      display: table-cell;
-      vertical-align: top;
-    }
-    .timeline-marker {
-      position: relative;
-    }
-    .timeline-content {
-      padding-left: 30px;
-    }
-    .timeline-info {
-      padding-right: 30px;
-    }
-    .period .timeline-title {
-      position: relative;
-      // left: -45px;
-    }
-  }
-}
-
 .timeline-centered {
-  @extend .timeline-split;
-  @media (min-width: 992px) {
-    &,
+  @media (min-width: map-get($breakpoints, large)) {
     .timeline-item,
     .timeline-info,
     .timeline-marker,
@@ -402,11 +382,10 @@ h6 {
       left: auto;
     }
   }
-  @media (max-width: 992px) {
+  @media (max-width: map-get($breakpoints, large)) {
     .timeline-item {
       display: list-item;
       .timeline-info {
-        padding-left: 30px;
         padding-right: 0;
       }
       .timeline-marker {
@@ -420,7 +399,7 @@ h6 {
       &.even {
         figure {
           width: 100%;
-          margin-left: 30px;
+          margin-left: 0;
         }
       }
     }
@@ -437,6 +416,18 @@ h6 {
   .timeline-item:hover .timeline-marker:before {
     background: $primary-color;
   }
+}
+
+.footnotes {
+  ol {
+    li {
+      text-align: left !important;
+    }
+  }
+}
+iframe {
+  width: 640px;
+  height: 360px;
 }
 
 @media print {
@@ -549,12 +540,6 @@ h6 {
             a:after {
               content: " (" attr(href) ") ";
             }
-          }
-          .timeline-title {
-            top: 0;
-            right: 0;
-            bottom: 0;
-            left: 0;
           }
         }
         figure[itemprop="image"] {
