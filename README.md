@@ -32,7 +32,7 @@ You should now have all the plugin files under
 
 ## Configuration
 
-Before configuring this plugin, you should copy the `user/plugins/timeline/timeline.yaml` to `user/config/plugins/timeline.yaml` and only edit that copy.
+Before configuring this plugin, you should copy the **user/plugins/timeline/timeline.yaml** to **user/config/plugins/timeline.yaml** and only edit that copy.
 
 Here is the default configuration and an explanation of available options:
 
@@ -58,11 +58,15 @@ truncate: 100
 | cache | native | `native`, `persist`, `transient`, or `disabled` | Where to store plugin's internal data. |
 | truncate | 100 | int or boolean | Limits the amount of words in each note, to an integer or boolean state for default (100). |
 
-Each timeline is structured with a Header (`timeline.md`, Timeline-template) and Events (`timeline_event.md`, Timeline Event-template). Headers are used as separators and can order their descendant Events, as well as contain normal fields such as `title`, `subtitle`, and `content`. Events also render a formatted, localized `date` (using [`date_format`](http://php.net/manual/en/function.date.php) and `locale`), as well as an `image`. In addition, Events are cast as Linked Data with [JSON-LD](https://json-ld.org/), wherein `type`, `place`, `locality`, and `region` are used.
+Each timeline is structured with a Header (**timeline.md**, Timeline-template) and Events (**timeline_event.md**, Timeline Event-template). Headers are used as separators and can order their descendant Events, as well as contain normal fields such as `title`, `subtitle`, and `content`. Events also render a formatted, localized `date` (using [`date_format`](http://php.net/manual/en/function.date.php) and `locale`), as well as an `image`. In addition, Events are cast as Linked Data with [JSON-LD](https://json-ld.org/), wherein `type`, `place`, `locality`, and `region` are used.
 
 #### Printing
 
-Two modes of printing are support: Pure text or with graphics. By default, graphics are included and the layout will typically emulate mobile-view - events will not alternate between odd and even. To print pure text, remove the `print`-class from `<div class="print timeline-wrapper col-12 col-sm-10 col-sm-offset-1 col-md-8 offset-md-2">` in [timeline.html.twig](https://github.com/OleVik/grav-plugin-timeline/blob/master/templates/timeline.html.twig).
+Two modes of printing are supported: **Pure TexT** or **Graphics**.
+
+By default, graphics are included, and the layout will typically emulate mobile-view. Events will not alternate between odd and even.
+
+To print pure text, remove the `print`-class from `<div class="print timeline-wrapper col-12 col-sm-10 col-sm-offset-1 col-md-8 offset-md-2">` in [timeline.html.twig](https://github.com/OleVik/grav-plugin-timeline/blob/master/templates/timeline.html.twig).
 
 ## Development
 
