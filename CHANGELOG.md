@@ -1,5 +1,5 @@
 # v1.1.0
-## xx-xx-2018
+## 26-10-2018
 
 1. [](#improved)
     * Abstracted tree-building from page-context
@@ -8,9 +8,13 @@
     * Responsive-styles
     * README
 2. [](#new)
+    * Standalone-template for Timeline-event
     * Added Data-API for UML-, JSON-, and Markdown-outputs
     * Added `dump`-command for Data-API access
     * CSS asset-group 'bottom' for non-render-blocking stylesheets
+3. [](#bugfix)
+    * CSS-fixes to enforce uniform styling
+    * Restrict assets to Timeline-pages
 
 # v1.0.2
 ## 13-09-2018

@@ -31,7 +31,7 @@ h6 {
       margin-bottom: 0; }
 
 .timeline {
-  list-style: none;
+  list-style: none !important;
   margin: 0;
   padding: 0;
   width: 100%; }
@@ -58,16 +58,19 @@ h6 {
     text-decoration: none; }
 
 .timeline-item {
-  padding-left: 40px;
+  padding-left: 40px !important;
   position: relative; }
   .timeline-item:last-child {
     padding-bottom: 0; }
   .timeline-item .timeline-content {
     padding-bottom: 40px; }
-    .timeline-item .timeline-content p:last-child {
-      margin-bottom: 0; }
     .timeline-item .timeline-content * {
       max-width: 100%; }
+    .timeline-item .timeline-content p:last-child {
+      margin-bottom: 0; }
+    .timeline-item .timeline-content ol,
+    .timeline-item .timeline-content ul {
+      list-style-position: inside; }
     .timeline-item .timeline-content .timeline-title {
       overflow-wrap: break-word;
       overflow: visible;

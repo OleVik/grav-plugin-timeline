@@ -1,0 +1,12 @@
+<div class="print timeline-wrapper">
+    <ul class="timeline">
+        {% include 'partials/timeline_item.html.twig' with {'page': page, 'i': i|default(1), 'truncate': truncate|default(400)} only %}
+        <li class="timeline-item even">
+            <div class="timeline-info">
+                <span></span>
+            </div>
+            <div class="timeline-marker"></div>
+            <div class="timeline-content"></div>
+        </li>
+    </ul>
+</div>

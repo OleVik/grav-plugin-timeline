@@ -50,7 +50,7 @@ h6 {
 }
 
 .timeline {
-  list-style: none;
+  list-style: none !important;
   margin: 0;
   padding: 0;
   width: 100%;
@@ -85,18 +85,22 @@ h6 {
 }
 
 .timeline-item {
-  padding-left: 40px;
+  padding-left: 40px !important;
   position: relative;
   &:last-child {
     padding-bottom: 0;
   }
   .timeline-content {
     padding-bottom: 40px;
+    * {
+      max-width: 100%;
+    }
     p:last-child {
       margin-bottom: 0;
     }
-    * {
-      max-width: 100%;
+    ol,
+    ul {
+      list-style-position: inside;
     }
     .timeline-title {
       overflow-wrap: break-word;
