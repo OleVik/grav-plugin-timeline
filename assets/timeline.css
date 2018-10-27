@@ -1,33 +1,33 @@
 /* Based on https://codepen.io/brady_wright/pen/NNOvrW */
-body {
+.timeline-page body {
   color: #768390;
   background: #fff;
   font-family: "Effra", Helvetica, sans-serif;
   padding: 0;
   -webkit-font-smoothing: antialiased; }
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
+.timeline-page h1,
+.timeline-page h2,
+.timeline-page h3,
+.timeline-page h4,
+.timeline-page h5,
+.timeline-page h6 {
   color: #3d4351;
   margin-top: 0; }
 
-.header {
+.timeline-page .header {
   text-align: center; }
-  .header .title,
-  .header .subtitle {
+  .timeline-page .header .title,
+  .timeline-page .header .subtitle {
     margin: 0.35em 0;
     line-height: 1.2;
     overflow-wrap: break-word;
     overflow: visible;
     word-break: break-word;
     white-space: normal; }
-  .header p {
+  .timeline-page .header p {
     margin: 1em auto; }
-    .header p:last-child {
+    .timeline-page .header p:last-child {
       margin-bottom: 0; }
 
 .timeline {
@@ -76,6 +76,11 @@ h6 {
       overflow: visible;
       word-break: break-word;
       white-space: normal; }
+    .timeline-item .timeline-content .footnotes ol li {
+      text-align: left !important; }
+    .timeline-item .timeline-content iframe {
+      width: 640px;
+      height: 360px; }
   .timeline-item.odd .timeline-content ul,
   .timeline-item.odd .timeline-content ol {
     width: fit-content;
@@ -239,6 +244,13 @@ h6 {
   .timeline-item:last-child .timeline-marker:after {
     content: none; }
 
+.timeline-centered .marker-outline .timeline-marker:before {
+  background: transparent;
+  border-color: #ff6b6b; }
+
+.timeline-centered .marker-outline .timeline-item:hover .timeline-marker:before {
+  background: #ff6b6b; }
+
 @media (min-width: 992px) {
   .timeline-centered .timeline-item,
   .timeline-centered .timeline-info,
@@ -301,20 +313,6 @@ h6 {
     .timeline-centered .timeline-item.odd figure, .timeline-centered .timeline-item.even figure {
       width: 100%;
       margin-left: 0; } }
-
-.marker-outline .timeline-marker:before {
-  background: transparent;
-  border-color: #ff6b6b; }
-
-.marker-outline .timeline-item:hover .timeline-marker:before {
-  background: #ff6b6b; }
-
-.footnotes ol li {
-  text-align: left !important; }
-
-iframe {
-  width: 640px;
-  height: 360px; }
 
 /* Print-style: Pure text */
 @media print {
