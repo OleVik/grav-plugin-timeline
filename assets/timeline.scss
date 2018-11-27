@@ -13,38 +13,40 @@ $breakpoints: (small: 576px, medium: 768px, large: 992px, extralarge: 1200px);
 $primary-color: #ff6b6b;
 $primary-color-hover: scale-color($primary-color, $lightness: 32%);
 
-body {
-  color: #768390;
-  background: #fff;
-  font-family: "Effra", Helvetica, sans-serif;
-  padding: 0;
-  -webkit-font-smoothing: antialiased;
-}
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  color: #3d4351;
-  margin-top: 0;
-}
-
-.header {
-  text-align: center;
-  .title,
-  .subtitle {
-    margin: 0.35em 0;
-    line-height: 1.2;
-    overflow-wrap: break-word;
-    overflow: visible;
-    word-break: break-word;
-    white-space: normal;
+.timeline-page {
+  body {
+    color: #768390;
+    background: #fff;
+    font-family: "Effra", Helvetica, sans-serif;
+    padding: 0;
+    -webkit-font-smoothing: antialiased;
   }
-  p {
-    margin: 1em auto;
-    &:last-child {
-      margin-bottom: 0;
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    color: #3d4351;
+    margin-top: 0;
+  }
+
+  .header {
+    text-align: center;
+    .title,
+    .subtitle {
+      margin: 0.35em 0;
+      line-height: 1.2;
+      overflow-wrap: break-word;
+      overflow: visible;
+      word-break: break-word;
+      white-space: normal;
+    }
+    p {
+      margin: 1em auto;
+      &:last-child {
+        margin-bottom: 0;
+      }
     }
   }
 }
@@ -107,6 +109,17 @@ h6 {
       overflow: visible;
       word-break: break-word;
       white-space: normal;
+    }
+    .footnotes {
+      ol {
+        li {
+          text-align: left !important;
+        }
+      }
+    }
+    iframe {
+      width: 640px;
+      height: 360px;
     }
   }
   &.odd {
@@ -326,6 +339,17 @@ h6 {
 }
 
 .timeline-centered {
+  .marker-outline {
+    .timeline-marker {
+      &:before {
+        background: transparent;
+        border-color: $primary-color;
+      }
+    }
+    .timeline-item:hover .timeline-marker:before {
+      background: $primary-color;
+    }
+  }
   @media (min-width: map-get($breakpoints, large)) {
     .timeline-item,
     .timeline-info,
@@ -408,30 +432,6 @@ h6 {
       }
     }
   }
-}
-
-.marker-outline {
-  .timeline-marker {
-    &:before {
-      background: transparent;
-      border-color: $primary-color;
-    }
-  }
-  .timeline-item:hover .timeline-marker:before {
-    background: $primary-color;
-  }
-}
-
-.footnotes {
-  ol {
-    li {
-      text-align: left !important;
-    }
-  }
-}
-iframe {
-  width: 640px;
-  height: 360px;
 }
 
 /* Print-style: Pure text */

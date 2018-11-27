@@ -1,3 +1,9 @@
+# v1.1.1
+## 27-10-2018
+
+1. [](#improved)
+    * Restrict CSS to template and related elements
+
 # v1.1.0
 ## 26-10-2018
 
