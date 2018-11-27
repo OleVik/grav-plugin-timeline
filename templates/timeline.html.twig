@@ -2,7 +2,7 @@
 <html lang="{{ grav.language.getActive ?: grav.config.site.default_lang }}">
     <head>
     {% block stylesheets %}
-        {% if page.template == 'timeline' %}
+        {% if page.template == 'timeline' or page.template == 'timeline_event' %}
         {% do assets.addCss('plugin://timeline/node_modules/bootstrap/dist/css/bootstrap.min.css') %}
         {% do assets.addCss('plugin://timeline/assets/timeline.css') %}
         {% do assets.addCss('plugin://timeline/assets/timeline.print.css') %}
@@ -43,6 +43,7 @@
     {% block scripts %}
         {{ assets.js() }}
         {{ assets.css('bottom') }}
+        {{ assets.js('bottom') }}
     {% endblock %}
     </body>
 </html>
