@@ -1,3 +1,9 @@
+# v1.1.3
+## 30-11-2018
+
+1. [](#bugfix)
+    * Fix missing `static`-keyword
+
 # v1.1.2
 ## 27-11-2018
 

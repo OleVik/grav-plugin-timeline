@@ -173,7 +173,7 @@ class Utilities
      * 
      * @return array
      */
-    public function sortLeaf(Array $array, $orderBy = null, $orderDir = null)
+    public static function sortLeaf(Array $array, $orderBy = null, $orderDir = null)
     {
         if (!$orderBy) {
             $orderBy = $this->orderBy;
