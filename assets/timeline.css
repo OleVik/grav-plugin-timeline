@@ -87,7 +87,8 @@
     margin-left: auto;
     text-align: left; }
   .timeline-item.odd figure {
-    margin-right: 50%;
+    width: calc(50% - 36px);
+    margin-right: calc(50% - 24px);
     text-align: right; }
   .timeline-item.even .timeline-content ul,
   .timeline-item.even .timeline-content ol {
@@ -95,7 +96,8 @@
     margin-right: auto;
     text-align: right; }
   .timeline-item.even figure {
-    margin-left: calc(50% + 30px);
+    width: calc(50% - 12px);
+    margin-left: calc(50% + 12px);
     text-align: left; }
   .timeline-item.period {
     padding: 0; }
@@ -264,8 +266,7 @@
     overflow: hidden; }
   .timeline-centered .timeline-marker {
     position: absolute;
-    left: 50%;
-    margin-left: -7.5px; }
+    left: 50%; }
   .timeline-centered .timeline-info,
   .timeline-centered .timeline-content {
     width: 50%; }
@@ -276,7 +277,7 @@
   .timeline-centered > .timeline-item.odd .timeline-content {
     float: left;
     text-align: right;
-    padding-right: 30px; }
+    padding-right: 36px; }
   .timeline-centered > .timeline-item.even .timeline-info {
     float: left;
     text-align: right;
@@ -284,7 +285,7 @@
   .timeline-centered > .timeline-item.even .timeline-content {
     float: right;
     text-align: left;
-    padding-left: 30px; }
+    padding-left: 12px; }
   .timeline-centered > .timeline-item.period .timeline-content {
     float: none;
     padding: 0;

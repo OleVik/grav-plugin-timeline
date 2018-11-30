@@ -1,3 +1,9 @@
+# v1.1.5
+## XX-XX-2018
+
+1. [](#bugfix)
+    * Fix misaligned events
+
 # v1.1.4
 ## 30-11-2018
 
