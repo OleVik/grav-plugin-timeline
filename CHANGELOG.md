@@ -1,3 +1,10 @@
+# v1.1.4
+## 30-11-2018
+
+1. [](#bugfix)
+    * Fix missing orderBy-options
+    * Fix Utilities::sortLeaf defaults
+
 # v1.1.3
 ## 30-11-2018
 

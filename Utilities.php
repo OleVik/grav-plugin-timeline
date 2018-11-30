@@ -173,16 +173,10 @@ class Utilities
      * 
      * @return array
      */
-    public static function sortLeaf(Array $array, $orderBy = null, $orderDir = null)
+    public static function sortLeaf(Array $array, String $orderBy = 'date', String $orderDir = 'asc')
     {
-        if (!$orderBy) {
-            $orderBy = $this->orderBy;
-        }
         if ($orderBy == 'date') {
             $orderBy = 'datetime';
-        }
-        if (!$orderDir) {
-            $orderDir = $this->orderDir;
         }
         $strategy = new ComplexSortStrategy();
         if ($orderDir == 'asc') {

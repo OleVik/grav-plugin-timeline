@@ -61,13 +61,16 @@ class Content
             $path = $page->path();
             $title = $page->title();
             $date = $page->date();
+            $folder = $page->folder();
             $template = $page->template();
             $markdown = $page->rawMarkdown();
             $content = $page->content();
             $datetime = \DateTime::createFromFormat('U', $date);
             $date = $datetime->format('Y-m-d H:i:s');
+            $paths[$route]['title'] = $title;
             $paths[$route]['depth'] = $depth;
             $paths[$route]['route'] = $route;
+            $paths[$route]['folder'] = $folder;
             $paths[$route]['datetime'] = $date;
             $paths[$route]['template'] = $template;
             $paths[$route]['markdown'] = $markdown;
