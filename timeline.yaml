@@ -5,3 +5,4 @@ order:
   dir: asc
 cache: native
 truncate: 100
+linked_data: true

@@ -1,7 +1,8 @@
-# v1.1.5
-## XX-XX-2018
+# v1.1.6
+## 30-11-2018
 
 1. [](#bugfix)
+    * Fix LinkedData-assets
     * Fix misaligned events
 
 # v1.1.4

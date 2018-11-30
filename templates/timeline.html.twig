@@ -44,6 +44,9 @@
         {{ assets.js() }}
         {{ assets.css('bottom') }}
         {{ assets.js('bottom') }}
+        {% if config.plugins['timeline'].linked_data %}
+        <script type="application/ld+json">{{ timeline_linked_data }}</script>
+        {% endif %}
     {% endblock %}
     </body>
 </html>

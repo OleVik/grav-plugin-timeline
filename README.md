@@ -57,6 +57,7 @@ truncate: 100
 |   dir | asc | `asc` or `desc` | Order pages ascending or descending. |
 | cache | native | `native`, `persist`, `transient`, or `disabled` | Where to store plugin's internal data. |
 | truncate | 100 | int or boolean | Limits the amount of words in each note, to an integer or boolean state for default (100). |
+| linked_data | true | `true` or `false` | Enables or disables Linked Data output. |
 
 Each timeline is structured with a Header (**timeline.md**, Timeline-template) and Events (**timeline_event.md**, Timeline Event-template). Headers are used as separators and can order their descendant Events, as well as contain normal fields such as `title`, `subtitle`, and `content`. Events also render a formatted, localized `date` (using [`date_format`](http://php.net/manual/en/function.date.php) and `locale`), as well as an `image`. In addition, Events are cast as Linked Data with [JSON-LD](https://json-ld.org/), wherein `type`, `place`, `locality`, and `region` are used.
 

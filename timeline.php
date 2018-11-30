@@ -126,9 +126,11 @@ class TimelinePlugin extends Plugin
             $content = new Content('date', 'asc');
             $tree = $content->buildTree($page->route());
             $this->grav['twig']->twig_vars['timeline_content'] = $tree;
-            $ld = new LinkedData();
-            $ld->buildTree($page->route());
-            $this->grav['assets']->addInlineJs($ld->getSchemas(), null, null, 'application/ld+json');
+            if ($this->config()['linked_data']) {
+                $ld = new LinkedData();
+                $ld->buildTree($page->route());
+                $this->grav['twig']->twig_vars['timeline_linked_data'] = $ld->getSchemas();
+            }
         }
     }
 
