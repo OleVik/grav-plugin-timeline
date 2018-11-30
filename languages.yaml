@@ -24,6 +24,7 @@ en:
         NATIVE: Native
         DISABLED: Disabled
       TRUNCATE: Truncate words
+      LINKED_DATA: Linked Data
       HELP:
         CACHE: Where to store plugin's internal data
         HEADER: Only title will appear as separator, leave empty for blank separator.
@@ -32,5 +33,7 @@ en:
         LOCALITY: Position or site.
         REGION: Physical geography.
         TRUNCATE: Limits the amount of words in each note, to an integer or boolean state for default (100)
+        LINKED_DATA: Enable or disable Linked Data output
       DESCRIPTION:
         CACHE: Native for /user/plugins/timeline/data, Persist for /user/data/timeline, Transient for /cache/timeline, Disabled for no caching.
+        LINKED_DATA: Enable or disable Linked Data output

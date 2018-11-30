@@ -1,3 +1,9 @@
+# v1.1.6
+## 30-11-2018
+
+1. [](#improved)
+    * Added blueprint option for linked_data
+
 # v1.1.5
 ## 30-11-2018
 
