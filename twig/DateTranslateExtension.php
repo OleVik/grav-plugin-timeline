@@ -7,7 +7,7 @@ use Jenssegers\Date\Date;
 /**
  * Localized date translation via Twig
  */
-class DateTranslate extends \Twig_Extension
+class DateTranslateExtension extends \Twig_Extension
 {
     /**
      * Initialize class

@@ -141,7 +141,7 @@ class TimelinePlugin extends Plugin
      * 
      * @return void
      */
-    public function onGetPageTemplates($event)
+    public function onGetPageTemplates(Event $event)
     {
         $types = $event->types;
         $res = $this->grav['locator'];
@@ -178,10 +178,11 @@ class TimelinePlugin extends Plugin
      */
     public static function getActiveLanguage()
     {
-        if (!Grav::instance()['config']->get('plugins')['timeline']['language']) {
+        $plugins = Grav::instance()['config']->get('plugins');
+        if (!$plugins['timeline']['language']) {
             return Grav::instance()['language']->getLanguage();
         } else {
-            Grav::instance()['config']->get('plugins')['timeline']['language'];
+            return $plugins['timeline']['language'];
         }
     }
 
@@ -258,8 +259,8 @@ class TimelinePlugin extends Plugin
     public function onTwigExtensions()
     {
         if (!class_exists('\Grav\Plugin\DateTranslate')) {
-            include_once __DIR__ . '/twig/DateTranslate.php';
-            $this->grav['twig']->twig->addExtension(new DateTranslate($this->grav));
+            include_once __DIR__ . '/twig/DateTranslateExtension.php';
+            $this->grav['twig']->twig->addExtension(new DateTranslateExtension($this->grav));
         }
         include_once __DIR__ . '/twig/TruncateExtension.php';
         $this->grav['twig']->twig->addExtension(new TruncateExtension($this->grav));

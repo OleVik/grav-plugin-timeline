@@ -55,34 +55,18 @@ class Content
         }
         $pages = $page->evaluate([$mode => $route]);
         $pages = $pages->published()->order($this->orderBy, $this->orderDir);
-        $paths = array();
+        $nodes = array();
         foreach ($pages as $page) {
             $route = $page->rawRoute();
             $path = $page->path();
-            $title = $page->title();
-            $date = $page->date();
-            $folder = $page->folder();
-            $template = $page->template();
-            $markdown = $page->rawMarkdown();
-            $content = $page->content();
-            $datetime = \DateTime::createFromFormat('U', $date);
-            $date = $datetime->format('Y-m-d H:i:s');
-            $paths[$route]['title'] = $title;
-            $paths[$route]['depth'] = $depth;
-            $paths[$route]['route'] = $route;
-            $paths[$route]['folder'] = $folder;
-            $paths[$route]['datetime'] = $date;
-            $paths[$route]['template'] = $template;
-            $paths[$route]['markdown'] = $markdown;
-            $paths[$route]['content'] = $content;
-            $header = $page->find($route)->header();
-            $header = $page->toArray($header)['header'];
-            $paths[$route]['header'] = $header;
+            $nodes[$route] = self::createNode($page, $depth);
+            $header = $nodes[$route]['header'];
             $media = new Media($path);
             foreach ($media->all() as $filename => $file) {
-                $paths[$route]['media'][$filename] = $file;
+                $nodes[$route]['media'][$filename] = $file;
             }
-            if (!empty($paths[$route])) {
+            $nodes[$route]['children'] = array();
+            if (!empty($nodes[$route])) {
                 $children = $this->buildTree($route, $mode, $depth);
                 if (!empty($children)) {
                     if (isset($header['order']['by'], $header['order']['dir'])) {
@@ -90,14 +74,54 @@ class Content
                         $orderDir = $header['order']['dir'];
                         $children = Utilities::sortLeaf($children, $orderBy, $orderDir);
                     }
-                    $paths[$route]['children'] = $children;
+                    $nodes[$route]['children'] = array_merge($children);
+                }
+            }
+            if (isset($header['inject_timeline'])) {
+                $injections = $this->buildTree($header['inject_timeline'], $mode, $depth);
+                if (!empty($injections)) {
+                    if (isset($header['order']['by'], $header['order']['dir'])) {
+                        $orderBy = $header['order']['by'];
+                        $orderDir = $header['order']['dir'];
+                        $injections = Utilities::sortLeaf($injections, $orderBy, $orderDir);
+                    }
+                    if ($header['inject_period'] == true) {
+                        $pages = Grav::instance()['pages'];
+                        $page = $pages->find($header['inject_timeline']);
+                        $nodes[$header['inject_timeline']] = self::createNode($page, $depth);
+                        $nodes[$header['inject_timeline']]['children'] = $injections;
+                    } else {
+                        $nodes[$route]['children'] = array_merge($children, $injections);
+                    }
                 }
             }
         }
-        if (!empty($paths)) {
-            return $paths;
+        if (!empty($nodes)) {
+            return $nodes;
         } else {
             return null;
         }
+    }
+
+    public static function createNode($page, $depth)
+    {
+        $node = array();
+        $route = $page->rawRoute();
+        $path = $page->path();
+        $date = $page->date();
+        $datetime = \DateTime::createFromFormat('U', $date);
+        $date = $datetime->format('Y-m-d H:i:s');
+        $header = $page->find($route)->header();
+        $header = $page->toArray($header)['header'];
+        $node['title'] = $page->title();
+        $node['depth'] = $depth;
+        $node['route'] = $route;
+        $node['folder'] = $page->folder();
+        $node['datetime'] = $date;
+        $node['template'] = $page->template();
+        $node['markdown'] = $page->rawMarkdown();
+        $node['content'] = $page->content();
+        $node['header'] = $header;
+        return $node;
     }
 }

@@ -13,6 +13,9 @@
     {% endblock %}
     </head>
     <body class="timeline-page">
+    {% block header %}
+        {% include 'partials/timeline_header.html.twig' %}
+    {% endblock %}
     {% block timeline %}
         {% import "macros/timeline.html.twig" as macros %}
         {% if page.header.truncate is defined %}
@@ -39,6 +42,9 @@
                 </div>
             </div>
         </div>
+    {% endblock %}
+    {% block footer %}
+        {% include 'partials/timeline_footer.html.twig' %}
     {% endblock %}
     {% block scripts %}
         {{ assets.js() }}

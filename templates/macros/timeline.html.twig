@@ -12,7 +12,7 @@
     
         {% if item.depth > 1 %}
             {% if item.template == 'timeline' %}
-                {% include 'partials/timeline_header.html.twig' with {'page': item, 'truncate': truncate} only %}
+                {% include 'partials/timeline_period.html.twig' with {'page': item, 'truncate': truncate} only %}
             {% elseif item.template == 'timeline_event' %}
                 {% include 'partials/timeline_item.html.twig' with {'page': item, 'i': i, 'truncate': truncate} only %}
             {% set i = i + 1 %}

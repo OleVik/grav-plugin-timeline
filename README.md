@@ -58,8 +58,12 @@ truncate: 100
 | cache | native | `native`, `persist`, `transient`, or `disabled` | Where to store plugin's internal data. |
 | truncate | 100 | int or boolean | Limits the amount of words in each note, to an integer or boolean state for default (100). |
 | linked_data | true | `true` or `false` | Enables or disables Linked Data output. |
+| inject_timeline | null | string | Route to page to inject. |
+| inject_period | false | `true` or `false` | Inject page as timeline-period if true, only events if false. |
 
 Each timeline is structured with a Header (**timeline.md**, Timeline-template) and Events (**timeline_event.md**, Timeline Event-template). Headers are used as separators and can order their descendant Events, as well as contain normal fields such as `title`, `subtitle`, and `content`. Events also render a formatted, localized `date` (using [`date_format`](http://php.net/manual/en/function.date.php) and `locale`), as well as an `image`. In addition, Events are cast as Linked Data with [JSON-LD](https://json-ld.org/), wherein `type`, `place`, `locality`, and `region` are used.
+
+Timelines can be mixed together from different locations in `/user/pages` by using the `inject_timeline`-field. Point it to a route (not path) where another timeline exists, and it will be added at the end of the current timeline. This can be done from any page that is a timeline, but not from an event. Use `inject_period` to designate that the page itself should be included, to demarcate a new period immediately following the timeline it was injected from.
 
 #### Printing
 
