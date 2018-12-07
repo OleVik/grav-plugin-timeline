@@ -491,6 +491,7 @@ $primary-color-hover: scale-color($primary-color, $lightness: 32%);
   iframe {
     display: none !important;
   }
+  .header,
   .timeline-wrapper {
     width: 95% !important;
     max-width: 95% !important;
@@ -605,5 +606,9 @@ $primary-color-hover: scale-color($primary-color, $lightness: 32%);
         }
       }
     }
+  }
+  .no-print,
+  .no-print * {
+    display: none !important;
   }
 }

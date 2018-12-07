@@ -356,6 +356,7 @@
     display: none !important; }
   iframe {
     display: none !important; }
+  .header,
   .timeline-wrapper {
     width: 95% !important;
     max-width: 95% !important;
@@ -437,6 +438,9 @@
       width: calc(100% - 30px);
       margin-left: 30px !important; }
     .print.timeline-wrapper .timeline .timeline-item.period .timeline-marker {
-      display: none !important; } }
+      display: none !important; }
+  .no-print,
+  .no-print * {
+    display: none !important; } }
 
 /*# sourceMappingURL=timeline.css.map */

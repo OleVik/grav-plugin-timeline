@@ -107,7 +107,6 @@ class Content
     {
         $node = array();
         $route = $page->rawRoute();
-        $path = $page->path();
         $date = $page->date();
         $datetime = \DateTime::createFromFormat('U', $date);
         $date = $datetime->format('Y-m-d H:i:s');
@@ -116,6 +115,7 @@ class Content
         $node['title'] = $page->title();
         $node['depth'] = $depth;
         $node['route'] = $route;
+        $node['url'] = $page->url();
         $node['folder'] = $page->folder();
         $node['datetime'] = $date;
         $node['template'] = $page->template();
