@@ -76,3 +76,7 @@ To print pure text, remove the `print`-class from `<div class="print timeline-wr
 ## Development
 
 Use a SCSS-compiler, like LibSass, eg. node-sass and compile `assets/timeline.scss` to `assets/timeline.css` in the plugin-folder. For example: `node-sass --watch --source-map true assets/timeline.scss assets/timeline.css`.
+
+
+## License
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2FOleVik%2Fgrav-plugin-timeline.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2FOleVik%2Fgrav-plugin-timeline?ref=badge_large)
