@@ -8,7 +8,7 @@
         {% do assets.addCss('plugin://timeline/assets/timeline.print.css') %}
         {% do assets.addCss('//fonts.googleapis.com/css?family=Roboto', {'group': 'bottom'}) %}
         {% do assets.addCss('plugin://timeline/node_modules/bootstrap/dist/css/bootstrap.min.css') %}
-        {{ assets.css() }}
+        {{ assets.css()|raw }}
         {% endif %}
     {% endblock %}
     </head>
@@ -47,9 +47,9 @@
         {% include 'partials/timeline_footer.html.twig' %}
     {% endblock %}
     {% block scripts %}
-        {{ assets.js() }}
-        {{ assets.css('bottom') }}
-        {{ assets.js('bottom') }}
+        {{ assets.js()|raw }}
+        {{ assets.css('bottom')|raw }}
+        {{ assets.js('bottom')|raw }}
         {% if config.plugins['timeline'].linked_data %}
         <script type="application/ld+json">{{ timeline_linked_data }}</script>
         {% endif %}

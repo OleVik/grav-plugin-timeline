@@ -1,5 +1,11 @@
+# v1.2.1
+## 06-06-2019
+
+1. [](#improved)
+    * Raw-filter assets
+
 # v1.2.0
-## XX-12-2018
+## 07-12-2018
 
 1. [](#new)
     * Added template-partials and blocks for header and footer
