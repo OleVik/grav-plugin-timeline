@@ -1,15 +1,22 @@
 <!DOCTYPE html>
 <html lang="{{ grav.language.getActive ?: grav.config.site.default_lang }}">
     <head>
-    {% block stylesheets %}
-        {% if page.template == 'timeline' or page.template == 'timeline_event' %}
-        {% do assets.addCss('plugin://timeline/node_modules/bootstrap/dist/css/bootstrap.min.css') %}
-        {% do assets.addCss('plugin://timeline/assets/timeline.css') %}
-        {% do assets.addCss('plugin://timeline/assets/timeline.print.css') %}
-        {% do assets.addCss('//fonts.googleapis.com/css?family=Roboto', {'group': 'bottom'}) %}
-        {% do assets.addCss('plugin://timeline/node_modules/bootstrap/dist/css/bootstrap.min.css') %}
+    {% block head %}
+    <meta charset="utf-8" />
+    <title>{% if header.title %}{{ header.title|e('html') }} | {% endif %}{{ site.title|e('html') }}</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="canonical" href="{{ page.url(true, true) }}" />
+        {% block stylesheets %}
+            {% if page.template == 'timeline' or page.template == 'timeline_event' %}
+            {% do assets.addCss('plugin://timeline/node_modules/bootstrap/dist/css/bootstrap.min.css') %}
+            {% do assets.addCss('plugin://timeline/assets/timeline.css') %}
+            {% do assets.addCss('plugin://timeline/assets/timeline.print.css') %}
+            {% do assets.addCss('//fonts.googleapis.com/css?family=Roboto', {'group': 'bottom'}) %}
+            {% do assets.addCss('plugin://timeline/node_modules/bootstrap/dist/css/bootstrap.min.css') %}
         {{ assets.css()|raw }}
-        {% endif %}
+            {% endif %}
+        {% endblock %}
     {% endblock %}
     </head>
     <body class="timeline-page">

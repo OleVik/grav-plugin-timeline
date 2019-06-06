@@ -11,8 +11,11 @@
     * Added template-partials and blocks for header and footer
     * Change template-partial name from "header" to "period"
     * Added functionality for injecting timelines
+    * Added support for subdirectory-installations
 2. [](#improved)
     * Code quality
+    * .header-styling
+    * Pathing
 
 # v1.1.6
 ## 30-11-2018
