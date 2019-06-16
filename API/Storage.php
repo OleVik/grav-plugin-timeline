@@ -18,6 +18,7 @@ use Symfony\Component\Filesystem\Exception\IOExceptionInterface;
  * backend. Defaults to 1 year TTL.
  *
  * @package Grav\Framework\Cache
+ * @deprecated 2.0.0
  */
 class FileStorage extends AbstractCache
 {

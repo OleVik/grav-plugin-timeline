@@ -1,7 +1,7 @@
 title: Timeline Event
 extends@:
-  - type: default
-    context: blueprints://pages
+  type: default
+  context: blueprints://pages
 
 form:
   fields:
@@ -21,7 +21,7 @@ form:
               type: datetime
               style: vertical
               ordering@: header.subtitle
-              default: ''
+              default: ""
               label: PLUGIN_TIMELINE.ADMIN.DATE
             header.date_format:
               type: dateformat
@@ -46,7 +46,7 @@ form:
               type: filepicker
               ordering@: header.media_order
               label: Select a file
-              folder: '@self'
+              folder: "@self"
               preview_images: true
               accept:
                 - .png

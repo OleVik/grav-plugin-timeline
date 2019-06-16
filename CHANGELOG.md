@@ -1,3 +1,12 @@
+# v1.3.0
+## 16-06-2019
+
+1. [](#new)
+    * Deprecate FileStorage
+    * Bump Grav-dependency
+2. [](#improved)
+    * Event-blueprint formatting
+
 # v1.2.1
 ## 06-06-2019
 

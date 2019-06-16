@@ -14,6 +14,7 @@ require __DIR__ . '/API/Data.php';
 require __DIR__ . '/API/Content.php';
 require __DIR__ . '/API/LinkedData.php';
 require __DIR__ . '/API/SchemaBlueprint.php';
+/* @deprecated 2.0.0 */
 require __DIR__ . '/API/Storage.php';
 require 'Utilities.php';
 use Timeline\API\Data;
@@ -21,6 +22,8 @@ use Timeline\API\Content;
 use Timeline\API\LinkedData;
 use Timeline\API\SchemaBlueprint;
 use Timeline\Utilities;
+use Grav\Framework\Cache\Adapter\FileCache;
+/* @deprecated 2.0.0 */
 use Grav\Framework\Cache\Adapter\FileStorage;
 
 /**
@@ -232,7 +235,7 @@ class TimelinePlugin extends Plugin
             'native' => $res->findResource('user://') . '/plugins/timeline/data'
         );
         $location = $target[$config['cache']];
-        $Storage = new FileStorage($location);
+        $Storage = new FileCache('', null, $location);
         if ($config['cache'] != 'disabled') {
             if (!$Storage->doHas($file)) {
                 $schemas = new SchemaBlueprint('/^Bordeux\\\\SchemaOrg\\\\Thing\\\\Event/mi');
