@@ -1,3 +1,9 @@
+# v1.3.1
+## 16-06-2019
+
+1. [](#improved)
+    * Conditional Linked Data
+
 # v1.3.0
 ## 16-06-2019
 

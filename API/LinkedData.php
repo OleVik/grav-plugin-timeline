@@ -92,11 +92,21 @@ class LinkedData
         if (isset($params['subtitle'])) {
             $event->alternateName($params['subtitle']);
         }
-        $event->startDate($params['date']);
-        $event->endDate($params['date']);
-        $event->url($params['url']);
-        $event->inLanguage($params['locale']);
-        $event->description($params['content']);
+        if (isset($params['date'])) {
+            $event->startDate($params['date']);
+        }
+        if (isset($params['date'])) {
+            $event->endDate($params['date']);
+        }
+        if (isset($params['url'])) {
+            $event->url($params['url']);
+        }
+        if (isset($params['locale'])) {
+            $event->inLanguage($params['locale']);
+        }
+        if (isset($params['content'])) {
+            $event->description($params['content']);
+        }
         $event->location(
             Schema::Place()
                 ->name(isset($params['place']) ? $params['place'] : 'Place')
