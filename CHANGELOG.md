@@ -1,3 +1,9 @@
+# v1.3.2
+## 26-02-2020
+
+1. [](#improved)
+    * Link to right branch in Docs-link
+
 # v1.3.1
 ## 16-06-2019
 
