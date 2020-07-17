@@ -1,5 +1,5 @@
 name: Timeline
-version: 1.3.2
+version: 1.3.3
 description: Create and manage timelines in an ordered, hierarchical manner.
 icon: align-center
 author:
@@ -63,14 +63,15 @@ form:
         persist: PLUGIN_TIMELINE.ADMIN.CACHE_OPTIONS.PERSIST
         transient: PLUGIN_TIMELINE.ADMIN.CACHE_OPTIONS.TRANSIENT
         disabled: PLUGIN_TIMELINE.ADMIN.CACHE_OPTIONS.DISABLED
-      validate:
-        type: bool
     truncate:
-      type: text
+      type: number
       label: PLUGIN_TIMELINE.ADMIN.TRUNCATE
       help: PLUGIN_TIMELINE.ADMIN.HELP.TRUNCATE
       default: 100
-      novalidate: true
+      validate:
+        min: 0
+        max: 1000
+        step: 50
     linked_data:
       type: toggle
       label: PLUGIN_TIMELINE.ADMIN.LINKED_DATA

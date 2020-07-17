@@ -1,3 +1,10 @@
+# v1.3.3
+## 17-07-2020
+
+1. [](#bugfix)
+    * Blueprints
+    * Caching-logic
+
 # v1.3.2
 ## 26-02-2020
 

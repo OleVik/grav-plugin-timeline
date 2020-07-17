@@ -229,14 +229,14 @@ class TimelinePlugin extends Plugin
         $config = Grav::instance()['config']->get('plugins.timeline');
         $res = Grav::instance()['locator'];
         $file = 'Event.schema.json';
-        $target = array(
-            'persist' => $res->findResource('user://') . '/data/timeline',
-            'transient' => $res->findResource('cache://') . '/timeline',
-            'native' => $res->findResource('user://') . '/plugins/timeline/data'
-        );
-        $location = $target[$config['cache']];
-        $Storage = new FileCache('', null, $location);
         if ($config['cache'] != 'disabled') {
+            $target = array(
+                'persist' => $res->findResource('user://') . '/data/timeline',
+                'transient' => $res->findResource('cache://') . '/timeline',
+                'native' => $res->findResource('user://') . '/plugins/timeline/data'
+            );
+            $location = $target[$config['cache']];
+            $Storage = new FileCache('', null, $location);
             if (!$Storage->doHas($file)) {
                 $schemas = new SchemaBlueprint('/^Bordeux\\\\SchemaOrg\\\\Thing\\\\Event/mi');
                 $schemas->remove('UserInteraction');
