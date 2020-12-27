@@ -2,7 +2,7 @@
 
 The **Timeline**-plugin is for [Grav CMS](http://github.com/getgrav/grav), and lets you create and manage timelines in an ordered, hierarchical manner. Timelines can be nested within each other, minutely customized on a page-level, and further customized with your own templates and styles. A [demo is available](https://olevik.me/staging/grav-skeleton-timeline), and demo content can be found in [/pages](https://github.com/OleVik/grav-skeleton-timeline/tree/master/pages).
 
-See the [Skeleton's README](https://github.com/OleVik/grav-skeleton-timeline/blob/master/README.md) for an extended guide on setup and usage.
+See the [Skeleton's README](https://github.com/OleVik/grav-skeleton-timeline/blob/master/README.md) for an extended guide on setup and usage. :warning: **Note the [PHP requirements](#requirements) for use**.
 
 ## Examples of use
 
@@ -12,11 +12,13 @@ See the [Skeleton's README](https://github.com/OleVik/grav-skeleton-timeline/blo
 
 Installing the Timeline-plugin can be done in one of two ways. The GPM (Grav Package Manager) installation method enables you to quickly and easily install the plugin with a simple terminal command, while the manual method enables you to do so via a zip file.
 
+<a name="requirements"/>
+
 ### Requirements
 
 **This plugin will only work with [Grav v1.6](https://github.com/getgrav/grav/tree/1.6) or higher, as it requires [PHP v7.1](http://php.net/manual/en/migration71.new-features.php) or higher. Dropping this requirement would mean devolving features, which the author is not inclined to do.**
 
-The [intl](http://php.net/manual/en/book.intl.php)-extension for PHP must be [installed and enabled](http://php.net/manual/en/intl.installation.php "See especially User Contributed Notes") to use this plugin.
+The **[intl](http://php.net/manual/en/book.intl.php)-extension for PHP must be [installed and enabled](http://php.net/manual/en/intl.installation.php "See especially User Contributed Notes")** to use this plugin.
 
 ### GPM Installation (Preferred)
 
