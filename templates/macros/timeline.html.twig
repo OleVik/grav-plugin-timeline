@@ -1,25 +1,33 @@
-{% macro timeline_iteration(timeline_content, config_truncate) %}
+{% macro timeline_iteration(timeline_content, truncate, truncate_image) %}
+    {% import _self as macros %}
     {% set i = 1 %}
     {% for item in timeline_content %}
-
         {% if item.header.truncate is defined %}
             {% set truncate = item.header.truncate %}
-        {% elseif config_truncate is defined %}
-            {% set truncate = config_truncate %}
+        {% elseif truncate is defined %}
+            {% set truncate = truncate %}
         {% else %}
             {% set truncate = false %}
         {% endif %}
-    
+        
+        {% if item.header.truncate_image is defined %}
+            {% set truncate_image = item.header.truncate_image %}
+        {% elseif truncate_image is defined %}
+            {% set truncate_image = truncate_image %}
+        {% else %}
+            {% set truncate_image = false %}
+        {% endif %}
+
         {% if item.depth > 1 %}
             {% if item.template == 'timeline' %}
-                {% include 'partials/timeline_period.html.twig' with {'page': item, 'truncate': truncate} only %}
+                {% include 'partials/timeline_period.html.twig' with {'page': item, 'truncate': truncate, 'truncate_image': truncate_image} only %}
             {% elseif item.template == 'timeline_event' %}
-                {% include 'partials/timeline_item.html.twig' with {'page': item, 'i': i, 'truncate': truncate} only %}
+                {% include 'partials/timeline_item.html.twig' with {'page': item, 'i': i, 'truncate': truncate, 'truncate_image': truncate_image} only %}
             {% set i = i + 1 %}
             {% endif %}
         {% endif %}
         {% if item.children is defined and item.children is not empty %}
-            {{ _self.timeline_iteration(item.children, truncate) }}
+            {{ macros.timeline_iteration(item.children, truncate, truncate_image) }}
         {% endif %}
     {% endfor %}
 {% endmacro %}

@@ -1,8 +1,9 @@
 enabled: true
-language: en
+locale: en
 order:
   by: date
   dir: asc
 cache: native
 truncate: 100
 linked_data: true
+limit: 8

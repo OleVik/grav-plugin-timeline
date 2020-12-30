@@ -9,8 +9,11 @@ en:
       SUBTITLE: Subtitle
       DATE: Date
       DATE_FORMAT: Date format
-      LANGUAGE: Default language
+      LOCALE: Default locale
       CONTENT: Content
+      IMAGE: Image
+      IMAGE_ALT: Alternative text for image
+      IMAGE_CAPTION: Caption text for image
       EVENT_OPTIONS: Event Options
       TYPE: Type
       PLACE: Place
@@ -24,16 +27,21 @@ en:
         NATIVE: Native
         DISABLED: Disabled
       TRUNCATE: Truncate words
+      TRUNCATE_IMAGE: Hide image
       LINKED_DATA: Linked Data
+      LIMIT: Limit
       HELP:
         CACHE: Where to store plugin's internal data
+      DESCRIPTION:
+        CACHE: Native for /user/plugins/timeline/data, Persist for /user/data/timeline, Transient for /cache/timeline, Disabled for no caching.
+        LOCALE: Language to use for translating dates and text.
+        IMAGE: Image to use for header.
         HEADER: Only title will appear as separator, leave empty for blank separator.
         TYPE: Type of event, following schema.org.
         PLACE: Fixed or physical location.
         LOCALITY: Position or site.
         REGION: Physical geography.
-        TRUNCATE: Limits the amount of words in each note, to an integer or boolean state for default (100)
-        LINKED_DATA: Enable or disable Linked Data output
-      DESCRIPTION:
-        CACHE: Native for /user/plugins/timeline/data, Persist for /user/data/timeline, Transient for /cache/timeline, Disabled for no caching.
-        LINKED_DATA: Enable or disable Linked Data output
+        TRUNCATE: Limits the amount of words in each note, to an integer or boolean state for default (100).
+        TRUNCATE_IMAGE: Prevents image set in FrontMatter from rendering.
+        LINKED_DATA: Enable or disable Linked Data output.
+        LIMIT: Maximum depth for iterating through Timelines.

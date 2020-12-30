@@ -1,8 +1,8 @@
 <?php
+
 namespace Grav\Plugin;
 
-require_once __DIR__ . '/../vendor/autoload.php';
-use Jenssegers\Date\Date;
+use Carbon\Carbon;
 
 /**
  * Localized date translation via Twig
@@ -28,7 +28,7 @@ class DateTranslateExtension extends \Twig_Extension
     {
         return 'DateTranslate';
     }
-    
+
     /**
      * Declare functions
      *
@@ -44,25 +44,21 @@ class DateTranslateExtension extends \Twig_Extension
     /**
      * Translate a date with localization
      *
-     * @param string $date   DateTime-object or human-readable time declaration
-     * @param string $format Date format recognized by PHP
-     * @param string $lang   ISO 639-1 language code
-     * 
-     * @return string
+     * @param string $date   DateTime-object or human-readable time declaration.
+     * @param string $format Date format recognized by PHP.
+     * @param string $lang   ISO 639-2 or ISO 639-3 language code.
+     *
+     * @return string Formatted date.
      */
     public function dateTranslate($date, $format, $lang = false)
     {
-        if ($lang == false) {
-            Date::setLocale($this->grav['language']->getLanguage());
+        if (!empty($lang)) {
+            $locale = $lang;
+        } elseif (!empty($this->grav['language']->getLanguage())) {
+            $locale = $this->grav['language']->getLanguage();
         } else {
-            Date::setLocale($lang);
+            $locale = Grav::instance()['config']->get('plugins.timeline.locale', 'en');
         }
-        if (is_string($date)) {
-            $parsed = Date::parse($date);
-        } else {
-            $parsed = new Date($date);
-        }
-        $formatted = $parsed->format($format);
-        return $formatted;
+        return Carbon::parse($date)->locale($locale)->format($format);
     }
 }

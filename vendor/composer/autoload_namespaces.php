@@ -6,5 +6,4 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
-    'PHPExtra\\Sorter' => array($vendorDir . '/phpextra/sorter/src'),
 );

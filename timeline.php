@@ -1,34 +1,27 @@
 <?php
+
+/**
+ * Timeline Plugin
+ *
+ * PHP version 7
+ *
+ * @package    Grav\Plugin
+ * @author     Ole Vik <git@olevik.net>
+ * @license    http://www.opensource.org/licenses/mit-license.html MIT License
+ * @link       https://github.com/OleVik/grav-plugin-timeline
+ */
+
 namespace Grav\Plugin;
 
 use Grav\Common\Grav;
 use Grav\Common\Plugin;
-use Grav\Common\Page\Header;
-use Grav\Common\Twig\TwigExtension;
-use Grav\Common\Language\LanguageCodes;
 use RocketTheme\Toolbox\Event\Event;
-
-require __DIR__ . '/vendor/autoload.php';
-
-require __DIR__ . '/API/Data.php';
-require __DIR__ . '/API/Content.php';
-require __DIR__ . '/API/LinkedData.php';
-require __DIR__ . '/API/SchemaBlueprint.php';
-/* @deprecated 2.0.0 */
-require __DIR__ . '/API/Storage.php';
-require 'Utilities.php';
-use Timeline\API\Data;
-use Timeline\API\Content;
-use Timeline\API\LinkedData;
-use Timeline\API\SchemaBlueprint;
-use Timeline\Utilities;
+use Grav\Plugin\TimelinePlugin\SchemaBlueprint;
 use Grav\Framework\Cache\Adapter\FileCache;
-/* @deprecated 2.0.0 */
-use Grav\Framework\Cache\Adapter\FileStorage;
 
 /**
  * Class TimelinePlugin
- * 
+ *
  * @package Grav\Plugin
  */
 class TimelinePlugin extends Plugin
@@ -48,8 +41,21 @@ class TimelinePlugin extends Plugin
     public static function getSubscribedEvents()
     {
         return [
-            'onPluginsInitialized' => ['onPluginsInitialized', 0]
+            'onPluginsInitialized' => [
+                ['autoload', 100000],
+                ['onPluginsInitialized', 0]
+            ]
         ];
+    }
+
+    /**
+     * Composer autoload.
+     *
+     * @return \Composer\Autoload\ClassLoader
+     */
+    public function autoload(): \Composer\Autoload\ClassLoader
+    {
+        return require __DIR__ . '/vendor/autoload.php';
     }
 
     /**
@@ -59,18 +65,14 @@ class TimelinePlugin extends Plugin
      */
     public function onPluginsInitialized()
     {
-        if ($this->config->get('system')['debugger']['enabled']) {
+        if (Grav::instance()['config']->get('system.debugger.enabled')) {
             $this->grav['debugger']->startTimer('timeline', 'Timeline');
         }
-        if (!extension_loaded('intl')) {
-            $this->grav['log']->notice('The Timeline-plugin for Grav requires the intl-extension for PHP.');
-            return;
-        }
-        $res = $this->grav['locator'];
+        $Locator = $this->grav['locator'];
         $this->target = array(
-            'persist' => $res->findResource('user://') . '/data/timeline',
-            'transient' => $res->findResource('cache://') . '/timeline',
-            'native' => $res->findResource('user://') . '/plugins/timeline/data'
+            'persist' => $Locator->findResource('user://') . '/data/timeline',
+            'transient' => $Locator->findResource('cache://') . '/timeline',
+            'native' => $Locator->findResource('user://') . '/plugins/timeline/data'
         );
         if ($this->isAdmin()) {
             $this->enable(
@@ -82,34 +84,18 @@ class TimelinePlugin extends Plugin
             $this->enable(
                 [
                     'onTwigTemplatePaths' => ['onTwigTemplatePaths', 0],
-                    'onTwigSiteVariables' => ['onTwigSiteVariables', 0],
                     'onTwigExtensions' => ['onTwigExtensions', 0]
                 ]
             );
         }
-        if ($this->config->get('system')['debugger']['enabled']) {
+        if (Grav::instance()['config']->get('system.debugger.enabled')) {
             $this->grav['debugger']->stopTimer('timeline');
         }
     }
 
     /**
-     * Declare config from plugin-config
-     * 
-     * @return array Plugin configuration
-     */
-    public function config()
-    {
-        $config = Grav::instance()['config']->get('plugins.timeline');
-        if ($config['enabled']) {
-            return $config;
-        } else {
-            return false;
-        }
-    }
-
-    /**
      * Add current directory to twig lookup paths.
-     * 
+     *
      * @return void
      */
     public function onTwigTemplatePaths()
@@ -118,58 +104,38 @@ class TimelinePlugin extends Plugin
     }
 
     /**
-     * Add data to Twig
-     * 
-     * @return void
-     */
-    public function onTwigSiteVariables()
-    {
-        $page = $this->grav['page'];
-        if ($this->config() && $page->template() == 'timeline') {
-            $content = new Content('date', 'asc');
-            $tree = $content->buildTree($page->route());
-            $this->grav['twig']->twig_vars['timeline_content'] = $tree;
-            if ($this->config()['linked_data']) {
-                $ld = new LinkedData();
-                $ld->buildTree($page->route());
-                $this->grav['twig']->twig_vars['timeline_linked_data'] = $ld->getSchemas();
-            }
-        }
-    }
-
-    /**
      * Register templates and blueprints
      *
      * @param RocketTheme\Toolbox\Event\Event $event Event handler
-     * 
+     *
      * @return void
      */
     public function onGetPageTemplates(Event $event)
     {
         $types = $event->types;
-        $res = $this->grav['locator'];
+        $Locator = $this->grav['locator'];
         $types->scanBlueprints(
-            $res->findResource('plugin://' . $this->name . '/blueprints')
+            $Locator->findResource('plugin://' . $this->name . '/blueprints')
         );
         $types->scanTemplates(
-            $res->findResource('plugin://' . $this->name . '/templates')
+            $Locator->findResource('plugin://' . $this->name . '/templates')
         );
     }
 
     /**
      * Get list of language codes
      *
+     * With ISO 639-2 and 639-3 as keys
+     *
      * @return array
      */
     public static function getLanguageCodes()
     {
-        $target = 'assets/ISO-639-1-language.json';
-        $res = Grav::instance()['locator'];
-        $file = $res->findResource('plugin://timeline/' . $target);
-        $json = json_decode(file_get_contents($file));
         $return = array();
-        foreach ($json as $code => $item) {
-            $return[$code] = $item->name;
+        foreach (\Carbon\Language::all() as $code => $item) {
+            if (isset($item['isoName'])) {
+                $return[$code] = $item['isoName'];
+            }
         }
         return $return;
     }
@@ -181,12 +147,13 @@ class TimelinePlugin extends Plugin
      */
     public static function getActiveLanguage()
     {
-        $plugins = Grav::instance()['config']->get('plugins');
-        if (!$plugins['timeline']['language']) {
+        if (Grav::instance()['language']->getLanguage()) {
             return Grav::instance()['language']->getLanguage();
-        } else {
-            return $plugins['timeline']['language'];
         }
+        if (Grav::instance()['config']->get('plugins.timeline.locale')) {
+            return Grav::instance()['config']->get('plugins.timeline.locale');
+        }
+        return "en";
     }
 
     /**
@@ -196,7 +163,10 @@ class TimelinePlugin extends Plugin
      */
     public static function getPluginLanguage()
     {
-        return Grav::instance()['config']->get('plugins')['timeline']['language'];
+        if (Grav::instance()['config']->get('plugins.timeline.locale')) {
+            return Grav::instance()['config']->get('plugins.timeline.locale');
+        }
+        return "en";
     }
 
     /**
@@ -227,13 +197,13 @@ class TimelinePlugin extends Plugin
     public static function getEventTypes()
     {
         $config = Grav::instance()['config']->get('plugins.timeline');
-        $res = Grav::instance()['locator'];
+        $Locator = Grav::instance()['locator'];
         $file = 'Event.schema.json';
         if ($config['cache'] != 'disabled') {
             $target = array(
-                'persist' => $res->findResource('user://') . '/data/timeline',
-                'transient' => $res->findResource('cache://') . '/timeline',
-                'native' => $res->findResource('user://') . '/plugins/timeline/data'
+                'persist' => $Locator->findResource('user://') . '/data/timeline',
+                'transient' => $Locator->findResource('cache://') . '/timeline',
+                'native' => $Locator->findResource('user://') . '/plugins/timeline/data'
             );
             $location = $target[$config['cache']];
             $Storage = new FileCache('', null, $location);
@@ -256,7 +226,7 @@ class TimelinePlugin extends Plugin
 
     /**
      * Add Twig extensions
-     * 
+     *
      * @return void
      */
     public function onTwigExtensions()
@@ -265,7 +235,9 @@ class TimelinePlugin extends Plugin
             include_once __DIR__ . '/twig/DateTranslateExtension.php';
             $this->grav['twig']->twig->addExtension(new DateTranslateExtension($this->grav));
         }
-        include_once __DIR__ . '/twig/TruncateExtension.php';
-        $this->grav['twig']->twig->addExtension(new TruncateExtension($this->grav));
+        include_once __DIR__ . '/twig/TimelineDataExtension.php';
+        $this->grav['twig']->twig->addExtension(new TimelineDataExtension($this->grav));
+        include_once __DIR__ . '/twig/TimelineTruncateExtension.php';
+        $this->grav['twig']->twig->addExtension(new TimelineTruncateExtension($this->grav));
     }
 }

@@ -6,8 +6,8 @@
         <span>{{ dt(page.header.date, page.header.date_format) }}</span>
     {% endif %}
     </div>
-    {% if page.header.image %}
-    <figure itemprop="image">
+    {% if page.header.image is defined and not truncate_image %}
+    <figure itemprop="image" alt="{{ truncate_image }}">
         <a href="{{ page.url }}">
             <img src="{{ page.media[page.header.image].url }}" alt="{{ page.header.image_alt }}">
         </a>

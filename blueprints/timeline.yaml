@@ -17,6 +17,53 @@ form:
               style: vertical
               ordering@: header.title
               label: PLUGIN_TIMELINE.ADMIN.SUBTITLE
+            header.date:
+              type: datetime
+              style: vertical
+              ordering@: header.subtitle
+              default: ""
+              label: PLUGIN_TIMELINE.ADMIN.DATE
+            header.date_format:
+              type: dateformat
+              style: vertical
+              ordering@: header.date
+              label: PLUGIN_TIMELINE.ADMIN.DATE_FORMAT
+              default: "F Y"
+              options:
+                "Y": Date1
+                "F Y": Date2
+                "d F Y": Date3
+                "F": Date4
+                "d F": Date5
+            header.locale:
+              type: select
+              style: vertical
+              ordering@: header.date_format
+              label: PLUGIN_TIMELINE.ADMIN.LOCALE
+              data-default@: '\Grav\Plugin\TimelinePlugin::getActiveLanguage'
+              data-options@: '\Grav\Plugin\TimelinePlugin::getLanguageCodes'
+            header.image:
+              type: filepicker
+              ordering@: header.media_order
+              label: PLUGIN_TIMELINE.ADMIN.IMAGE
+              description: PLUGIN_TIMELINE.ADMIN.DESCRIPTION.IMAGE
+              folder: "@self"
+              preview_images: true
+              accept:
+                - .png
+                - .jpg
+                - .jpeg
+                - .gif
+            header.image_alt:
+              type: text
+              style: vertical
+              ordering@: header.image
+              label: PLUGIN_TIMELINE.ADMIN.IMAGE_ALT
+            header.image_caption:
+              type: text
+              style: vertical
+              ordering@: header.image_alt
+              label: PLUGIN_TIMELINE.ADMIN.IMAGE_CAPTION
             header.order.by:
               type: select
               style: vertical

@@ -1,4 +1,5 @@
 <?php
+
 namespace Grav\Plugin\Console;
 
 use Grav\Common\Grav;
@@ -6,12 +7,12 @@ use Grav\Common\GravTrait;
 use Grav\Console\ConsoleCommand;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputOption;
-use Timeline\API\SchemaBlueprint;
+use Grav\Plugin\TimelinePlugin\SchemaBlueprint;
 use Grav\Framework\Cache\Adapter\FileStorage;
 
 /**
  * Class SchemaBlueprintCommand
- * 
+ *
  * @package Grav\Plugin\Timeline
  * @author  Ole Vik <git@olevik.net>
  * @license MIT
@@ -59,7 +60,7 @@ class SchemaBlueprintCommand extends ConsoleCommand
             $data = json_encode($schemas->data);
             $Storage->doSet($file, $data, 0);
             $this->output->writeln('<info>Saved to ' . $location . '/' . $file . '.</info>');
-        } catch(\Exception $e) {
+        } catch (\Exception $e) {
             throw new \Exception($e);
         }
     }

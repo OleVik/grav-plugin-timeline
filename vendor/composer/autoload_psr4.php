@@ -6,10 +6,12 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
+    'Symfony\\Polyfill\\Php80\\' => array($vendorDir . '/symfony/polyfill-php80'),
     'Symfony\\Polyfill\\Mbstring\\' => array($vendorDir . '/symfony/polyfill-mbstring'),
+    'Symfony\\Contracts\\Translation\\' => array($vendorDir . '/symfony/translation-contracts'),
     'Symfony\\Component\\Translation\\' => array($vendorDir . '/symfony/translation'),
     'Spatie\\SchemaOrg\\' => array($vendorDir . '/spatie/schema-org/src'),
-    'Jenssegers\\Date\\' => array($vendorDir . '/jenssegers/date/src'),
+    'Grav\\Plugin\\TimelinePlugin\\' => array($baseDir . '/classes'),
+    'Carbon\\' => array($vendorDir . '/nesbot/carbon/src/Carbon'),
     'Bordeux\\SchemaOrg\\' => array($vendorDir . '/bordeux/schema-org/src'),
-    '' => array($vendorDir . '/nesbot/carbon/src'),
 );

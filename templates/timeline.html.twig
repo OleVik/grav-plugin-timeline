@@ -7,16 +7,16 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="canonical" href="{{ page.url(true, true) }}" />
-        {% block stylesheets %}
-            {% if page.template == 'timeline' or page.template == 'timeline_event' %}
+    {% block stylesheets %}
+        {% if page.template == 'timeline' or page.template == 'timeline_event' %}
             {% do assets.addCss('plugin://timeline/node_modules/bootstrap/dist/css/bootstrap.min.css') %}
             {% do assets.addCss('plugin://timeline/assets/timeline.css') %}
             {% do assets.addCss('plugin://timeline/assets/timeline.print.css') %}
             {% do assets.addCss('//fonts.googleapis.com/css?family=Roboto', {'group': 'bottom'}) %}
             {% do assets.addCss('plugin://timeline/node_modules/bootstrap/dist/css/bootstrap.min.css') %}
-        {{ assets.css()|raw }}
-            {% endif %}
-        {% endblock %}
+            {{ assets.css()|raw }}
+        {% endif %}
+    {% endblock %}
     {% endblock %}
     </head>
     <body class="timeline-page">
@@ -24,26 +24,45 @@
         {% include 'partials/timeline_header.html.twig' %}
     {% endblock %}
     {% block timeline %}
-        {% import "macros/timeline.html.twig" as macros %}
+        {% set timeline_content = build_timeline(page.route) %}
         {% if page.header.truncate is defined %}
-            {% set config_truncate = page.header.truncate %}
+            {% set truncate = page.header.truncate %}
         {% elseif config.plugins['timeline'].truncate is defined %}
-            {% set config_truncate = config.plugins['timeline'].truncate %}
+            {% set truncate = config.plugins['timeline'].truncate %}
         {% else %}
-            {% set config_truncate = false %}
+            {% set truncate = false %}
+        {% endif %}
+        
+        {% if page.header.truncate_image is defined %}
+            {% set truncate_image = page.header.truncate_image %}
+        {% elseif config.plugins['timeline'].truncate_image is defined %}
+            {% set truncate_image = config.plugins['timeline'].truncate_image %}
+        {% else %}
+            {% set truncate_image = false %}
         {% endif %}
         <div class="container-fluid">
             <div class="row">
                 <div class="header col-12 col-sm-10 col-sm-offset-1 col-md-8 offset-md-2">
                     <h1 class="title">{{ page.title }}</h1>
                     <h2 class="subtitle">{{ page.header.subtitle }}</h2>
-                    {{ page.content|truncate_words(config_truncate) }}
+                    {% if page.header.image is defined and not truncate_image %}
+                    <figure class="mt-4" itemprop="image">
+                        <a href="{{ page.route }}">
+                            <img src="{{ page.media[page.header.image].url }}" alt="{{ page.header.image_alt|striptags }}">
+                        </a>
+                        {% if page.header.image_caption is defined and page.header.image_caption is not empty %}
+                        <figcaption>{{ page.header.image_caption|markdown }}</figcaption>
+                        {% endif %}
+                    </figure>
+                    {% endif %}
+                    {{ page.content }}
                     <hr />
                 </div>
                 <div class="print timeline-wrapper col-12 col-sm-10 col-sm-offset-1 col-md-8 offset-md-2">
                     {% block timeline_events %}
+                    {% import "macros/timeline.html.twig" as macros %}
                     <ul class="timeline timeline-centered">
-                        {{ macros.timeline_iteration(timeline_content, config_truncate) }}
+                        {{ macros.timeline_iteration(timeline_content, truncate, truncate_image) }}
                     </ul>
                     {% endblock %}
                 </div>
@@ -58,7 +77,7 @@
         {{ assets.css('bottom')|raw }}
         {{ assets.js('bottom')|raw }}
         {% if config.plugins['timeline'].linked_data %}
-        <script type="application/ld+json">{{ timeline_linked_data }}</script>
+        <script type="application/ld+json">{{ build_linkeddata(page.route) }}</script>
         {% endif %}
     {% endblock %}
     </body>

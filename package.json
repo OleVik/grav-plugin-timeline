@@ -1,7 +1,7 @@
 {
   "name": "grav-plugin-timeline",
   "version": "1.0.0",
-  "description": "Dependencies for Timeline-plugin for Grav",
+  "description": "Timeline-plugin for Grav",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/OleVik/grav-plugin-timeline.git"

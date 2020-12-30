@@ -1,4 +1,5 @@
 <?php
+
 namespace Grav\Plugin\Console;
 
 use Grav\Common\Grav;
@@ -6,13 +7,13 @@ use Grav\Common\GravTrait;
 use Grav\Console\ConsoleCommand;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputOption;
-use Timeline\API\Content;
-use Timeline\API\Data;
+use Grav\Plugin\TimelinePlugin\Content;
+use Grav\Plugin\TimelinePlugin\Data;
 use Grav\Framework\Cache\Adapter\FileStorage;
 
 /**
  * Class DumpDataCommand
- * 
+ *
  * @package Grav\Plugin\Timeline
  * @author  Ole Vik <git@olevik.net>
  * @license MIT
@@ -75,21 +76,21 @@ class DumpDataCommand extends ConsoleCommand
             $content = new Content('date', 'asc');
             $tree = $content->buildTree($route);
             switch ($type) {
-            case 'nodestructure':
-                $file = 'nodestructure.json';
-                $data = Data::getNodeStructure($tree);
-                break;
-            case 'uml':
-                $file = 'timeline.uml';
-                $data = Data::getUMLSyntax($tree);
-                break;
-            case 'markdown':
-                $file = 'timeline.md';
-                $data = Data::getMarkdownOutput($tree);
-                break;
-            default:
-                $file = 'timeline.uml';
-                $data = Data::getUMLSyntax($tree);
+                case 'nodestructure':
+                    $file = 'nodestructure.json';
+                    $data = Data::getNodeStructure($tree);
+                    break;
+                case 'uml':
+                    $file = 'timeline.uml';
+                    $data = Data::getUMLSyntax($tree);
+                    break;
+                case 'markdown':
+                    $file = 'timeline.md';
+                    $data = Data::getMarkdownOutput($tree);
+                    break;
+                default:
+                    $file = 'timeline.uml';
+                    $data = Data::getUMLSyntax($tree);
             }
             if ($echo) {
                 echo $data;
@@ -107,7 +108,7 @@ class DumpDataCommand extends ConsoleCommand
                 $Storage->doSet($file, $data, 0);
                 $this->output->writeln('<info>Saved to ' . $location . '/' . $file . '.</info>');
             }
-        } catch(\Exception $e) {
+        } catch (\Exception $e) {
             throw new \Exception($e);
         }
     }
