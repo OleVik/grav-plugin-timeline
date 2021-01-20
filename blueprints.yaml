@@ -1,6 +1,5 @@
 name: Timeline
-version: 2.0.0-beta.1
-testing: true
+version: 2.0.0
 description: Create and manage timelines in an ordered, hierarchical manner.
 icon: align-center
 author:
