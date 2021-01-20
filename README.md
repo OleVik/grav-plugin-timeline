@@ -130,7 +130,7 @@ Clicking the Add Page button yields:
 
 Your theme can override, extend or otherwise customize the [`timeline.html.twig`](https://github.com/OleVik/grav-plugin-timeline/blob/master/templates/timeline.html.twig)-template just by creating a local copy in `/user/themes/mytheme/templates/timeline.html.twig`. If you just want to add a header or footer, for a menu or copyright notice, for example, you can use the [`partials/timeline_header.html.twig`](https://github.com/OleVik/grav-plugin-timeline/blob/master/templates/partials/timeline_header.html.twig) and [`partials/timeline_footer.html.twig`](https://github.com/OleVik/grav-plugin-timeline/blob/master/templates/partials/timeline_footer.html.twig) templates.
 
-These are empty in the plugin's directory, but anything inside them will be included by the plugin's main template. Just placed them in `/user/themes/mytheme/templates/partials`. You could also call the [`timeline`-block](https://github.com/OleVik/grav-plugin-timeline/blob/master/templates/timeline.html.twig) from the main template using the [block-function](https://twig.symfony.com/doc/1.x/functions/block.html).
+These are empty in the plugin's directory, but anything inside them will be included by the plugin's main template. Just place them in `/user/themes/mytheme/templates/partials`. You could also call the [`timeline`-block](https://github.com/OleVik/grav-plugin-timeline/blob/master/templates/timeline.html.twig) from the main template using the [block-function](https://twig.symfony.com/doc/1.x/functions/block.html).
 
 <a name="strategies"/>
 
