@@ -38,7 +38,7 @@
                 <span>{{ dt(next.date, next.header.date_format, next.header.locale|default("en")) }}</span>
                 </div>
                 <a href="{{ next.url }}" class="timeline-title">
-                    <h3>{{ next.title }}</h4>
+                    <h3>{{ next.title }}</h3>
                 </a>
                 {% if next.header.subtitle is not empty %}
                     <h4 class="timeline-title">{{ next.header.subtitle }}</h4>
@@ -52,7 +52,7 @@
                 <span>{{ dt(prev.date, prev.header.date_format, prev.header.locale|default("en")) }}</span>
                 </div>
                 <a href="{{ prev.url }}" class="timeline-title">
-                    <h3>{{ prev.title }}</h4>
+                    <h3>{{ prev.title }}</h3>
                 </a>
                 {% if prev.header.subtitle is not empty %}
                     <h4 class="timeline-title">{{ prev.header.subtitle }}</h4>
