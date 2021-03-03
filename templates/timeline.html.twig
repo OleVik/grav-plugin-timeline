@@ -13,7 +13,6 @@
             {% do assets.addCss('plugin://timeline/assets/timeline.css') %}
             {% do assets.addCss('plugin://timeline/assets/timeline.print.css') %}
             {% do assets.addCss('//fonts.googleapis.com/css?family=Roboto', {'group': 'bottom'}) %}
-            {% do assets.addCss('plugin://timeline/node_modules/bootstrap/dist/css/bootstrap.min.css') %}
             {{ assets.css()|raw }}
         {% endif %}
     {% endblock %}
