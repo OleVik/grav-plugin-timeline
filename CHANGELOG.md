@@ -1,3 +1,10 @@
+# v2.0.1
+## 04-03-2021
+
+1. [](#bugfix)
+    * Bad, bad elements
+    * Copying and pasting at the speed of light
+
 # v2.0.0
 ## 20-01-2021
 
