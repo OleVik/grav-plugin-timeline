@@ -1,5 +1,5 @@
 name: Timeline
-version: 2.0.1
+version: 2.1.0
 description: Create and manage timelines in an ordered, hierarchical manner.
 icon: align-center
 author:
@@ -11,7 +11,7 @@ bugs: https://github.com/OleVik/grav-plugin-timeline/issues
 docs: https://github.com/OleVik/grav-plugin-timeline/blob/master/README.md
 license: MIT
 dependencies:
-  - { name: grav, version: ">=1.6.10" }
+  - { name: grav, version: ">=1.7" }
 
 form:
   validation: strict

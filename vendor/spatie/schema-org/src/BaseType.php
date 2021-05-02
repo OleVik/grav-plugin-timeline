@@ -2,12 +2,14 @@
 
 namespace Spatie\SchemaOrg;
 
+use ArrayAccess;
 use DateTime;
-use ReflectionClass;
 use DateTimeInterface;
+use JsonSerializable;
+use ReflectionClass;
 use Spatie\SchemaOrg\Exceptions\InvalidProperty;
 
-abstract class BaseType implements Type, \ArrayAccess, \JsonSerializable
+abstract class BaseType implements Type, ArrayAccess, JsonSerializable
 {
     /** @var array */
     protected $properties = [];
@@ -24,7 +26,9 @@ abstract class BaseType implements Type, \ArrayAccess, \JsonSerializable
 
     public function setProperty(string $property, $value)
     {
-        $this->properties[$property] = $value;
+        if ($value !== null && $value !== '') {
+            $this->properties[$property] = $value;
+        }
 
         return $this;
     }
@@ -57,6 +61,14 @@ abstract class BaseType implements Type, \ArrayAccess, \JsonSerializable
         return $this->properties;
     }
 
+    /**
+     * @return ReferencedType|static
+     */
+    public function referenced()
+    {
+        return new ReferencedType($this);
+    }
+
     public function offsetExists($offset)
     {
         return array_key_exists($offset, $this->properties);
@@ -79,6 +91,7 @@ abstract class BaseType implements Type, \ArrayAccess, \JsonSerializable
 
     public function toArray(): array
     {
+        $this->serializeIdentifier();
         $properties = $this->serializeProperty($this->getProperties());
 
         return [
@@ -102,11 +115,23 @@ abstract class BaseType implements Type, \ArrayAccess, \JsonSerializable
             $property = $property->format(DateTime::ATOM);
         }
 
+        if (is_object($property) && method_exists($property, '__toString')) {
+            $property = (string) $property;
+        }
+
         if (is_object($property)) {
             throw new InvalidProperty();
         }
 
         return $property;
+    }
+
+    protected function serializeIdentifier()
+    {
+        if (isset($this['identifier']) && ! $this['identifier'] instanceof Type) {
+            $this->setProperty('@id', $this['identifier']);
+            unset($this['identifier']);
+        }
     }
 
     public function toScript(): string

@@ -18,8 +18,8 @@
   "require": {
     "php": ">=7.1.3",
     "bordeux/schema-org": "^1.0",
-    "spatie/schema-org": "^2.0",
-    "nesbot/carbon": "^2.43"
+    "spatie/schema-org": "^3.3",
+    "nesbot/carbon": "^2.46"
   },
   "autoload": {
     "psr-4": {

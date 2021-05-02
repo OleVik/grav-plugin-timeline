@@ -2,22 +2,140 @@
 
 namespace Spatie\SchemaOrg;
 
+use \Spatie\SchemaOrg\Contracts\PropertyValueContract;
+use \Spatie\SchemaOrg\Contracts\IntangibleContract;
+use \Spatie\SchemaOrg\Contracts\StructuredValueContract;
+use \Spatie\SchemaOrg\Contracts\ThingContract;
+
 /**
  * A property-value pair, e.g. representing a feature of a product or place. Use
  * the 'name' property for the name of the property. If there is an additional
  * human-readable version of the value, put that into the 'description'
  * property.
  * 
- *  Always use specific schema.org properties when a) they exist and b) you can
+ * Always use specific schema.org properties when a) they exist and b) you can
  * populate them. Using PropertyValue as a substitute will typically not trigger
  * the same effect as using the original, specific property.
  *
- * @see http://schema.org/PropertyValue
+ * @see https://schema.org/PropertyValue
+ * @link http://www.w3.org/wiki/WebSchemas/SchemaDotOrgSources#source_GoodRelationsClass
  *
- * @mixin \Spatie\SchemaOrg\StructuredValue
  */
-class PropertyValue extends BaseType
+class PropertyValue extends BaseType implements PropertyValueContract, IntangibleContract, StructuredValueContract, ThingContract
 {
+    /**
+     * An additional type for the item, typically used for adding more specific
+     * types from external vocabularies in microdata syntax. This is a
+     * relationship between something and a class that the thing is in. In RDFa
+     * syntax, it is better to use the native RDFa syntax - the 'typeof'
+     * attribute - for multiple types. Schema.org tools may have only weaker
+     * understanding of extra types, in particular those defined externally.
+     *
+     * @param string|string[] $additionalType
+     *
+     * @return static
+     *
+     * @see https://schema.org/additionalType
+     */
+    public function additionalType($additionalType)
+    {
+        return $this->setProperty('additionalType', $additionalType);
+    }
+
+    /**
+     * An alias for the item.
+     *
+     * @param string|string[] $alternateName
+     *
+     * @return static
+     *
+     * @see https://schema.org/alternateName
+     */
+    public function alternateName($alternateName)
+    {
+        return $this->setProperty('alternateName', $alternateName);
+    }
+
+    /**
+     * A description of the item.
+     *
+     * @param string|string[] $description
+     *
+     * @return static
+     *
+     * @see https://schema.org/description
+     */
+    public function description($description)
+    {
+        return $this->setProperty('description', $description);
+    }
+
+    /**
+     * A sub property of description. A short description of the item used to
+     * disambiguate from other, similar items. Information from other properties
+     * (in particular, name) may be necessary for the description to be useful
+     * for disambiguation.
+     *
+     * @param string|string[] $disambiguatingDescription
+     *
+     * @return static
+     *
+     * @see https://schema.org/disambiguatingDescription
+     */
+    public function disambiguatingDescription($disambiguatingDescription)
+    {
+        return $this->setProperty('disambiguatingDescription', $disambiguatingDescription);
+    }
+
+    /**
+     * The identifier property represents any kind of identifier for any kind of
+     * [[Thing]], such as ISBNs, GTIN codes, UUIDs etc. Schema.org provides
+     * dedicated properties for representing many of these, either as textual
+     * strings or as URL (URI) links. See [background
+     * notes](/docs/datamodel.html#identifierBg) for more details.
+     *
+     * @param \Spatie\SchemaOrg\Contracts\PropertyValueContract|\Spatie\SchemaOrg\Contracts\PropertyValueContract[]|string|string[] $identifier
+     *
+     * @return static
+     *
+     * @see https://schema.org/identifier
+     */
+    public function identifier($identifier)
+    {
+        return $this->setProperty('identifier', $identifier);
+    }
+
+    /**
+     * An image of the item. This can be a [[URL]] or a fully described
+     * [[ImageObject]].
+     *
+     * @param \Spatie\SchemaOrg\Contracts\ImageObjectContract|\Spatie\SchemaOrg\Contracts\ImageObjectContract[]|string|string[] $image
+     *
+     * @return static
+     *
+     * @see https://schema.org/image
+     */
+    public function image($image)
+    {
+        return $this->setProperty('image', $image);
+    }
+
+    /**
+     * Indicates a page (or other CreativeWork) for which this thing is the main
+     * entity being described. See [background
+     * notes](/docs/datamodel.html#mainEntityBackground) for details.
+     *
+     * @param \Spatie\SchemaOrg\Contracts\CreativeWorkContract|\Spatie\SchemaOrg\Contracts\CreativeWorkContract[]|string|string[] $mainEntityOfPage
+     *
+     * @return static
+     *
+     * @see https://schema.org/mainEntityOfPage
+     */
+    public function mainEntityOfPage($mainEntityOfPage)
+    {
+        return $this->setProperty('mainEntityOfPage', $mainEntityOfPage);
+    }
+
     /**
      * The upper value of some characteristic or property.
      *
@@ -25,11 +143,46 @@ class PropertyValue extends BaseType
      *
      * @return static
      *
-     * @see http://schema.org/maxValue
+     * @see https://schema.org/maxValue
+     * @link http://www.w3.org/wiki/WebSchemas/SchemaDotOrgSources#source_GoodRelationsTerms
      */
     public function maxValue($maxValue)
     {
         return $this->setProperty('maxValue', $maxValue);
+    }
+
+    /**
+     * A technique or technology used in a [[Dataset]] (or [[DataDownload]],
+     * [[DataCatalog]]),
+     * corresponding to the method used for measuring the corresponding
+     * variable(s) (described using [[variableMeasured]]). This is oriented
+     * towards scientific and scholarly dataset publication but may have broader
+     * applicability; it is not intended as a full representation of
+     * measurement, but rather as a high level summary for dataset discovery.
+     * 
+     * For example, if [[variableMeasured]] is: molecule concentration,
+     * [[measurementTechnique]] could be: "mass spectrometry" or "nmr
+     * spectroscopy" or "colorimetry" or "immunofluorescence".
+     * 
+     * If the [[variableMeasured]] is "depression rating", the
+     * [[measurementTechnique]] could be "Zung Scale" or "HAM-D" or "Beck
+     * Depression Inventory".
+     * 
+     * If there are several [[variableMeasured]] properties recorded for some
+     * given data object, use a [[PropertyValue]] for each [[variableMeasured]]
+     * and attach the corresponding [[measurementTechnique]].
+     *
+     * @param string|string[] $measurementTechnique
+     *
+     * @return static
+     *
+     * @see https://schema.org/measurementTechnique
+     * @see http://pending.schema.org
+     * @link https://github.com/schemaorg/schemaorg/issues/1425
+     */
+    public function measurementTechnique($measurementTechnique)
+    {
+        return $this->setProperty('measurementTechnique', $measurementTechnique);
     }
 
     /**
@@ -39,11 +192,41 @@ class PropertyValue extends BaseType
      *
      * @return static
      *
-     * @see http://schema.org/minValue
+     * @see https://schema.org/minValue
+     * @link http://www.w3.org/wiki/WebSchemas/SchemaDotOrgSources#source_GoodRelationsTerms
      */
     public function minValue($minValue)
     {
         return $this->setProperty('minValue', $minValue);
+    }
+
+    /**
+     * The name of the item.
+     *
+     * @param string|string[] $name
+     *
+     * @return static
+     *
+     * @see https://schema.org/name
+     */
+    public function name($name)
+    {
+        return $this->setProperty('name', $name);
+    }
+
+    /**
+     * Indicates a potential Action, which describes an idealized action in
+     * which this thing would play an 'object' role.
+     *
+     * @param \Spatie\SchemaOrg\Contracts\ActionContract|\Spatie\SchemaOrg\Contracts\ActionContract[] $potentialAction
+     *
+     * @return static
+     *
+     * @see https://schema.org/potentialAction
+     */
+    public function potentialAction($potentialAction)
+    {
+        return $this->setProperty('potentialAction', $potentialAction);
     }
 
     /**
@@ -63,11 +246,42 @@ class PropertyValue extends BaseType
      *
      * @return static
      *
-     * @see http://schema.org/propertyID
+     * @see https://schema.org/propertyID
      */
     public function propertyID($propertyID)
     {
         return $this->setProperty('propertyID', $propertyID);
+    }
+
+    /**
+     * URL of a reference Web page that unambiguously indicates the item's
+     * identity. E.g. the URL of the item's Wikipedia page, Wikidata entry, or
+     * official website.
+     *
+     * @param string|string[] $sameAs
+     *
+     * @return static
+     *
+     * @see https://schema.org/sameAs
+     */
+    public function sameAs($sameAs)
+    {
+        return $this->setProperty('sameAs', $sameAs);
+    }
+
+    /**
+     * A CreativeWork or Event about this Thing.
+     *
+     * @param \Spatie\SchemaOrg\Contracts\CreativeWorkContract|\Spatie\SchemaOrg\Contracts\CreativeWorkContract[]|\Spatie\SchemaOrg\Contracts\EventContract|\Spatie\SchemaOrg\Contracts\EventContract[] $subjectOf
+     *
+     * @return static
+     *
+     * @see https://schema.org/subjectOf
+     * @link https://github.com/schemaorg/schemaorg/issues/1670
+     */
+    public function subjectOf($subjectOf)
+    {
+        return $this->setProperty('subjectOf', $subjectOf);
     }
 
     /**
@@ -79,7 +293,8 @@ class PropertyValue extends BaseType
      *
      * @return static
      *
-     * @see http://schema.org/unitCode
+     * @see https://schema.org/unitCode
+     * @link http://www.w3.org/wiki/WebSchemas/SchemaDotOrgSources#source_GoodRelationsTerms
      */
     public function unitCode($unitCode)
     {
@@ -95,11 +310,25 @@ class PropertyValue extends BaseType
      *
      * @return static
      *
-     * @see http://schema.org/unitText
+     * @see https://schema.org/unitText
      */
     public function unitText($unitText)
     {
         return $this->setProperty('unitText', $unitText);
+    }
+
+    /**
+     * URL of the item.
+     *
+     * @param string|string[] $url
+     *
+     * @return static
+     *
+     * @see https://schema.org/url
+     */
+    public function url($url)
+    {
+        return $this->setProperty('url', $url);
     }
 
     /**
@@ -109,12 +338,17 @@ class PropertyValue extends BaseType
      * for values is 'Number'.
      * * For [[PropertyValue]], it can be 'Text;', 'Number', 'Boolean', or
      * 'StructuredValue'.
+     * * Use values from 0123456789 (Unicode 'DIGIT ZERO' (U+0030) to 'DIGIT
+     * NINE' (U+0039)) rather than superficially similiar Unicode symbols.
+     * * Use '.' (Unicode 'FULL STOP' (U+002E)) rather than ',' to indicate a
+     * decimal point. Avoid using these symbols as a readability separator.
      *
-     * @param StructuredValue|StructuredValue[]|bool|bool[]|float|float[]|int|int[]|string|string[] $value
+     * @param \Spatie\SchemaOrg\Contracts\StructuredValueContract|\Spatie\SchemaOrg\Contracts\StructuredValueContract[]|bool|bool[]|float|float[]|int|int[]|string|string[] $value
      *
      * @return static
      *
-     * @see http://schema.org/value
+     * @see https://schema.org/value
+     * @link http://www.w3.org/wiki/WebSchemas/SchemaDotOrgSources#source_GoodRelationsTerms
      */
     public function value($value)
     {
@@ -125,11 +359,12 @@ class PropertyValue extends BaseType
      * A pointer to a secondary value that provides additional information on
      * the original value, e.g. a reference temperature.
      *
-     * @param Enumeration|Enumeration[]|PropertyValue|PropertyValue[]|QualitativeValue|QualitativeValue[]|QuantitativeValue|QuantitativeValue[]|StructuredValue|StructuredValue[] $valueReference
+     * @param \Spatie\SchemaOrg\Contracts\EnumerationContract|\Spatie\SchemaOrg\Contracts\EnumerationContract[]|\Spatie\SchemaOrg\Contracts\PropertyValueContract|\Spatie\SchemaOrg\Contracts\PropertyValueContract[]|\Spatie\SchemaOrg\Contracts\QualitativeValueContract|\Spatie\SchemaOrg\Contracts\QualitativeValueContract[]|\Spatie\SchemaOrg\Contracts\QuantitativeValueContract|\Spatie\SchemaOrg\Contracts\QuantitativeValueContract[]|\Spatie\SchemaOrg\Contracts\StructuredValueContract|\Spatie\SchemaOrg\Contracts\StructuredValueContract[] $valueReference
      *
      * @return static
      *
-     * @see http://schema.org/valueReference
+     * @see https://schema.org/valueReference
+     * @link http://www.w3.org/wiki/WebSchemas/SchemaDotOrgSources#source_GoodRelationsTerms
      */
     public function valueReference($valueReference)
     {

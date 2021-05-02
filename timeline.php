@@ -42,7 +42,6 @@ class TimelinePlugin extends Plugin
     {
         return [
             'onPluginsInitialized' => [
-                ['autoload', 100000],
                 ['onPluginsInitialized', 0]
             ]
         ];
@@ -57,7 +56,6 @@ class TimelinePlugin extends Plugin
     {
         return require __DIR__ . '/vendor/autoload.php';
     }
-
     /**
      * Initialize the plugin
      *
@@ -65,6 +63,7 @@ class TimelinePlugin extends Plugin
      */
     public function onPluginsInitialized()
     {
+        $this->grav['debugger']->addMessage('Timeline getLanguageCodes');
         if (Grav::instance()['config']->get('system.debugger.enabled')) {
             $this->grav['debugger']->startTimer('timeline', 'Timeline');
         }
@@ -131,7 +130,6 @@ class TimelinePlugin extends Plugin
      */
     public static function getLanguageCodes()
     {
-        $return = array();
         foreach (\Carbon\Language::all() as $code => $item) {
             if (isset($item['isoName'])) {
                 $return[$code] = $item['isoName'];
@@ -150,10 +148,7 @@ class TimelinePlugin extends Plugin
         if (Grav::instance()['language']->getLanguage()) {
             return Grav::instance()['language']->getLanguage();
         }
-        if (Grav::instance()['config']->get('plugins.timeline.locale')) {
-            return Grav::instance()['config']->get('plugins.timeline.locale');
-        }
-        return "en";
+        return Grav::instance()['config']->get('plugins.timeline.locale', 'en');
     }
 
     /**
@@ -163,10 +158,7 @@ class TimelinePlugin extends Plugin
      */
     public static function getPluginLanguage()
     {
-        if (Grav::instance()['config']->get('plugins.timeline.locale')) {
-            return Grav::instance()['config']->get('plugins.timeline.locale');
-        }
-        return "en";
+        return Grav::instance()['config']->get('plugins.timeline.locale', 'en');
     }
 
     /**
@@ -176,7 +168,7 @@ class TimelinePlugin extends Plugin
      */
     public static function getOrderBy()
     {
-        return Grav::instance()['config']->get('plugins')['timeline']['order']['by'];
+        return Grav::instance()['config']->get('plugins.timeline.order.by', 'date');
     }
 
     /**
@@ -186,7 +178,7 @@ class TimelinePlugin extends Plugin
      */
     public static function getOrderDir()
     {
-        return Grav::instance()['config']->get('plugins')['timeline']['order']['dir'];
+        return Grav::instance()['config']->get('plugins.timeline.order.dir', 'desc');
     }
 
     /**

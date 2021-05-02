@@ -1,3 +1,10 @@
+# v2.1.0
+## 02-05-2021
+
+1. [](#improved)
+    * Bumped spatie/schema-org
+    * Bumped nesbot/carbon
+
 # v2.0.1
 ## 04-03-2021
 
