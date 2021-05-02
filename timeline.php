@@ -63,7 +63,6 @@ class TimelinePlugin extends Plugin
      */
     public function onPluginsInitialized()
     {
-        $this->grav['debugger']->addMessage('Timeline getLanguageCodes');
         if (Grav::instance()['config']->get('system.debugger.enabled')) {
             $this->grav['debugger']->startTimer('timeline', 'Timeline');
         }
