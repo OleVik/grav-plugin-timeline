@@ -129,6 +129,7 @@ class TimelinePlugin extends Plugin
      */
     public static function getLanguageCodes()
     {
+        require_once __DIR__ . '/vendor/autoload.php';
         foreach (\Carbon\Language::all() as $code => $item) {
             if (isset($item['isoName'])) {
                 $return[$code] = $item['isoName'];
