@@ -36,7 +36,7 @@ The **Timeline**-plugin is for [Grav CMS](http://github.com/getgrav/grav), and l
 
 ## Examples of use
 
-- Colin M. Madland has used the plugin to document a [Critical Family History](https://grav.madland.ca/timeline)
+- Colin M. Madland has used the plugin to document a [Critical Family History](https://grav.madland.ca/writing/timeline)
 
 <a name="configuration"/>
 
