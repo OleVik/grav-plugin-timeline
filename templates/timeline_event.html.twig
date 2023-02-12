@@ -17,7 +17,7 @@
             <h1 class="title">{{ page.title }}</h1>
             <h2 class="subtitle">{{ page.header.subtitle }}</h2>
             <time datetime="{{ dt(page.date, 'c', page.header.locale|default('en')) }}">{{ dt(page.date, page.header.date_format|default(site.date_short)|default('d-m-Y'), page.header.locale|default("en")) }}</time>
-            {{ page.content }}
+            {{ page.content|raw }}
             <hr />
         </div>
         <div class="print timeline-wrapper col-12 col-sm-10 col-sm-offset-1 col-md-8 offset-md-2">

@@ -47,17 +47,26 @@ class TimelineDataExtension extends \Twig_Extension
     /**
      * Instantiate Content and build tree
      *
-     * @param string $route    Route to page.
-     * @param string $limit    Limit recursion-depth.
-     * @param string $orderBy  Property to order by.
-     * @param string $orderDir Direction to order.
+     * @param string $route     Route to page.
+     * @param string $limit     Limit recursion-depth.
+     * @param string $orderBy   Property to order by.
+     * @param string $orderDir  Direction to order.
+     * @param string $startDate Start of date range.
+     * @param string $endDate   End of date range.
      *
-     * @return array Page-structure with children and media
+     * @return array Hierarchical Page-structure with children and media
      */
-    public function getTree($route, $limit = null, $orderBy = 'date', $orderDir = 'asc')
-    {
-        $content = new Content($orderBy, $orderDir);
-        return $content->buildTree($route, $limit);
+    public function getTree(
+        $route,
+        $limit = null,
+        $orderBy = 'date',
+        $orderDir = 'asc',
+        $startDate = null,
+        $endDate = null
+    ) {
+        $content = new Content($orderBy, $orderDir, $startDate, $endDate);
+        $tree = $content->buildTree($route, $limit);
+        return $tree;
     }
 
     /**

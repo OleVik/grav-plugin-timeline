@@ -29,46 +29,112 @@ use Grav\Plugin\TimelinePlugin\Utilities;
 class Content
 {
     /**
+     * Property to order content by.
+     * @var string
+     */
+    private $orderBy;
+
+    /**
+     * Direction to order content by.
+     * @var string
+     */
+    private $orderDir;
+
+    /**
+     * Start of date range.
+     * @var string
+     */
+    private $startDate;
+
+    /**
+     * End of date range.
+     * @var string
+     */
+    private $endDate;
+
+    /**
+     * Limit recursion-depth..
+     * @var int
+     */
+    private $limit;
+
+    /**
+     * Grav-instance.
+     * @var object
+     */
+    public $instance;
+
+    /**
+     * Page-instance.
+     * @var object
+     */
+    public $page;
+
+    /**
+     * Page-instance.
+     * @var string
+     */
+    public $locale;
+
+    /**
+     * Start of processing.
+     * @var object
+     */
+    public $startTime;
+
+    /**
      * Initialize class
      *
      * @param string $orderBy  Property to order by.
      * @param string $orderDir Direction to order.
      */
-    public function __construct($orderBy = 'date', $orderDir = 'asc')
-    {
+    public function __construct(
+        $orderBy = 'date',
+        $orderDir = 'asc',
+        $startDate = null,
+        $endDate = null
+    ) {
+        $this->startTime = microtime(true);
         $this->orderBy = $orderBy;
         $this->orderDir = $orderDir;
+        $this->startDate = $startDate;
+        $this->endDate = $endDate;
+        $this->instance = Grav::instance();
+        $this->page = $this->instance['page'];
+        $this->locale = $this->instance['config']->get('plugins.timeline.locale', 'en');
+
+        if (isset($this->page->header()->limit) && is_int($this->page->header()->limit)) {
+            $this->limit = $this->page->header()->limit;
+        } else {
+            $this->limit = $this->instance['config']->get('plugins.timeline.limit', 8);
+        }
     }
 
     /**
      * Create page-structure recursively
      *
      * @param string  $route Route to page.
-     * @param string  $limit Limit recursion-depth.
      * @param string  $mode  Placeholder for operation-mode, private.
      * @param integer $depth Placeholder for recursion depth, private.
      *
      * @return array Page-structure with children and media
      */
-    public function buildTree($route, $limit = null, $mode = false, $depth = 0)
+    public function buildTree($route, $mode = false, $depth = 0)
     {
-        if (!Grav::instance()['page']->route()) {
+        $nodes = array();
+        $locale = $this->locale;
+        $orderBy = $this->orderBy;
+        $orderDir = $this->orderDir;
+        if (!$this->page->route()) {
             $grav = Grav::instance();
             $grav['debugger']->enabled(false);
             $grav['twig']->init();
             $grav['pages']->init();
             $page = $grav['page']->find($route);
         } else {
-            $page = Grav::instance()['page'];
+            $page = $this->page;
         }
-        if (!isset($limit) || !is_int($limit)) {
-            if (isset($page->header()->limit) && is_int($page->header()->limit)) {
-                $limit = $page->header()->limit;
-            } else {
-                $limit = Grav::instance()['config']->get('plugins.timeline.limit', 8);
-            }
-        }
-        if ($depth >= $limit) {
+        if ($depth >= $this->limit) {
             return;
         }
         $depth++;
@@ -76,12 +142,17 @@ class Content
         if ($depth > 1) {
             $mode = '@page.children';
         }
-        $pages = $page->evaluate([$mode => $route]);
-        $pages = $pages->published()->order($this->orderBy, $this->orderDir);
-        $nodes = array();
-        $locale = Grav::instance()['config']->get('plugins.timeline.locale', 'en');
-        $orderBy = $this->orderBy;
-        $orderDir = $this->orderDir;
+        $pages = $this->page->evaluate([$mode => $route])->published();
+        foreach ($pages as $page) {
+            if ($page->template() == 'timeline') {
+                $events = $page->evaluate(['@page.descendants' => $page->route()]);
+                $events = $events->published()->order($this->orderBy, $this->orderDir);
+                $first = $events->ofType('timeline_event')->first();
+                $page->date(date('c', $first->date()));
+            }
+        }
+        $pages->dateRange($this->startDate, $this->endDate);
+
         foreach ($pages as $page) {
             $route = $page->rawRoute();
             $path = $page->path();
@@ -104,7 +175,7 @@ class Content
             }
             $nodes[$route]['children'] = array();
             if (!empty($nodes[$route])) {
-                $children = $this->buildTree($route, $limit, $mode, $depth);
+                $children = $this->buildTree($route, $mode, $depth);
                 if (!empty($children)) {
                     $children = Utilities::parseLocalizedDatetimes($children, $orderBy, $locale);
                     $children = Utilities::sortByDatetime($children, $orderDir, $orderBy);
@@ -112,7 +183,7 @@ class Content
                 }
             }
             if (isset($header['inject_timeline'])) {
-                $injections = $this->buildTree($header['inject_timeline'], $limit, $mode, $depth);
+                $injections = $this->buildTree($header['inject_timeline'], $mode, $depth);
                 if (!empty($injections)) {
                     $children = Utilities::parseLocalizedDatetimes($injections, $orderBy, $locale);
                     $children = Utilities::sortByDatetime($injections, $orderDir, $orderBy);

@@ -21,6 +21,6 @@
         {% if page.header.subtitle %}
         <h4 class="timeline-title">{{ page.header.subtitle }}</h4>
         {% endif %}
-        {{ page.content|truncate_words(truncate) }}
+        {{ page.content|truncate_words(truncate)|raw }}
     </div>
 </li>
