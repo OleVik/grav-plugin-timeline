@@ -6,7 +6,8 @@ icon: align-center
 author:
   name: Ole Vik
   email: git@olevik.net
-homepage: https://github.com/OleVik/grav-plugin-timeline
+homepage: https://github.com/OleVik/grav-plugin-timeline/
+demo: https://olevik.net/staging/grav-skeleton-timeline/
 keywords: timeline, timelines
 bugs: https://github.com/OleVik/grav-plugin-timeline/issues
 docs: https://github.com/OleVik/grav-plugin-timeline/blob/master/README.md
