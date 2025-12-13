@@ -21,12 +21,17 @@ class ComposerStaticInitf21f6a3bd6c544a7aefe117c23a0f84b
             'Symfony\\Component\\Translation\\' => 30,
             'Spatie\\SchemaOrg\\' => 17,
         ),
+        'P' => 
+        array (
+            'Psr\\Clock\\' => 10,
+        ),
         'G' => 
         array (
             'Grav\\Plugin\\TimelinePlugin\\' => 27,
         ),
         'C' => 
         array (
+            'Carbon\\Doctrine\\' => 16,
             'Carbon\\' => 7,
         ),
         'B' => 
@@ -56,9 +61,17 @@ class ComposerStaticInitf21f6a3bd6c544a7aefe117c23a0f84b
         array (
             0 => __DIR__ . '/..' . '/spatie/schema-org/src',
         ),
+        'Psr\\Clock\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/psr/clock/src',
+        ),
         'Grav\\Plugin\\TimelinePlugin\\' => 
         array (
             0 => __DIR__ . '/../..' . '/classes',
+        ),
+        'Carbon\\Doctrine\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/carbonphp/carbon-doctrine-types/src/Carbon/Doctrine',
         ),
         'Carbon\\' => 
         array (

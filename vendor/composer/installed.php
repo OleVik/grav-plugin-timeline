@@ -1,94 +1,116 @@
-<?php return array (
-  'root' => 
-  array (
-    'pretty_version' => 'dev-master',
-    'version' => 'dev-master',
-    'aliases' => 
-    array (
+<?php return array(
+    'root' => array(
+        'name' => 'olevik/grav-plugin-timeline',
+        'pretty_version' => 'dev-master',
+        'version' => 'dev-master',
+        'reference' => 'f87703001d4796431aeecd1928c69d099c24f645',
+        'type' => 'project',
+        'install_path' => __DIR__ . '/../../',
+        'aliases' => array(),
+        'dev' => true,
     ),
-    'reference' => 'a650443c2c60208fb82d2bd446beade67175c28a',
-    'name' => 'olevik/grav-plugin-timeline',
-  ),
-  'versions' => 
-  array (
-    'bordeux/schema-org' => 
-    array (
-      'pretty_version' => 'v1.0.6',
-      'version' => '1.0.6.0',
-      'aliases' => 
-      array (
-      ),
-      'reference' => 'd845c4d56552ff5cb168780bf95c08e2f1211d50',
+    'versions' => array(
+        'bordeux/schema-org' => array(
+            'pretty_version' => 'v1.0.6',
+            'version' => '1.0.6.0',
+            'reference' => 'd845c4d56552ff5cb168780bf95c08e2f1211d50',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../bordeux/schema-org',
+            'aliases' => array(),
+            'dev_requirement' => false,
+        ),
+        'carbonphp/carbon-doctrine-types' => array(
+            'pretty_version' => '3.2.0',
+            'version' => '3.2.0.0',
+            'reference' => '18ba5ddfec8976260ead6e866180bd5d2f71aa1d',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../carbonphp/carbon-doctrine-types',
+            'aliases' => array(),
+            'dev_requirement' => false,
+        ),
+        'nesbot/carbon' => array(
+            'pretty_version' => '2.73.0',
+            'version' => '2.73.0.0',
+            'reference' => '9228ce90e1035ff2f0db84b40ec2e023ed802075',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../nesbot/carbon',
+            'aliases' => array(),
+            'dev_requirement' => false,
+        ),
+        'olevik/grav-plugin-timeline' => array(
+            'pretty_version' => 'dev-master',
+            'version' => 'dev-master',
+            'reference' => 'f87703001d4796431aeecd1928c69d099c24f645',
+            'type' => 'project',
+            'install_path' => __DIR__ . '/../../',
+            'aliases' => array(),
+            'dev_requirement' => false,
+        ),
+        'psr/clock' => array(
+            'pretty_version' => '1.0.0',
+            'version' => '1.0.0.0',
+            'reference' => 'e41a24703d4560fd0acb709162f73b8adfc3aa0d',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../psr/clock',
+            'aliases' => array(),
+            'dev_requirement' => false,
+        ),
+        'psr/clock-implementation' => array(
+            'dev_requirement' => false,
+            'provided' => array(
+                0 => '1.0',
+            ),
+        ),
+        'spatie/schema-org' => array(
+            'pretty_version' => '3.3.0',
+            'version' => '3.3.0.0',
+            'reference' => 'c847dc09c78e8ba8fe3a32e062c05368388671c1',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../spatie/schema-org',
+            'aliases' => array(),
+            'dev_requirement' => false,
+        ),
+        'symfony/polyfill-mbstring' => array(
+            'pretty_version' => 'v1.22.1',
+            'version' => '1.22.1.0',
+            'reference' => '5232de97ee3b75b0360528dae24e73db49566ab1',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../symfony/polyfill-mbstring',
+            'aliases' => array(),
+            'dev_requirement' => false,
+        ),
+        'symfony/polyfill-php80' => array(
+            'pretty_version' => 'v1.22.1',
+            'version' => '1.22.1.0',
+            'reference' => 'dc3063ba22c2a1fd2f45ed856374d79114998f91',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../symfony/polyfill-php80',
+            'aliases' => array(),
+            'dev_requirement' => false,
+        ),
+        'symfony/translation' => array(
+            'pretty_version' => 'v5.2.7',
+            'version' => '5.2.7.0',
+            'reference' => 'e37ece5242564bceea54d709eafc948377ec9749',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../symfony/translation',
+            'aliases' => array(),
+            'dev_requirement' => false,
+        ),
+        'symfony/translation-contracts' => array(
+            'pretty_version' => 'v2.4.0',
+            'version' => '2.4.0.0',
+            'reference' => '95c812666f3e91db75385749fe219c5e494c7f95',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../symfony/translation-contracts',
+            'aliases' => array(),
+            'dev_requirement' => false,
+        ),
+        'symfony/translation-implementation' => array(
+            'dev_requirement' => false,
+            'provided' => array(
+                0 => '2.3',
+            ),
+        ),
     ),
-    'nesbot/carbon' => 
-    array (
-      'pretty_version' => '2.46.0',
-      'version' => '2.46.0.0',
-      'aliases' => 
-      array (
-      ),
-      'reference' => '2fd2c4a77d58a4e95234c8a61c5df1f157a91bf4',
-    ),
-    'olevik/grav-plugin-timeline' => 
-    array (
-      'pretty_version' => 'dev-master',
-      'version' => 'dev-master',
-      'aliases' => 
-      array (
-      ),
-      'reference' => 'a650443c2c60208fb82d2bd446beade67175c28a',
-    ),
-    'spatie/schema-org' => 
-    array (
-      'pretty_version' => '3.3.0',
-      'version' => '3.3.0.0',
-      'aliases' => 
-      array (
-      ),
-      'reference' => 'c847dc09c78e8ba8fe3a32e062c05368388671c1',
-    ),
-    'symfony/polyfill-mbstring' => 
-    array (
-      'pretty_version' => 'v1.22.1',
-      'version' => '1.22.1.0',
-      'aliases' => 
-      array (
-      ),
-      'reference' => '5232de97ee3b75b0360528dae24e73db49566ab1',
-    ),
-    'symfony/polyfill-php80' => 
-    array (
-      'pretty_version' => 'v1.22.1',
-      'version' => '1.22.1.0',
-      'aliases' => 
-      array (
-      ),
-      'reference' => 'dc3063ba22c2a1fd2f45ed856374d79114998f91',
-    ),
-    'symfony/translation' => 
-    array (
-      'pretty_version' => 'v5.2.7',
-      'version' => '5.2.7.0',
-      'aliases' => 
-      array (
-      ),
-      'reference' => 'e37ece5242564bceea54d709eafc948377ec9749',
-    ),
-    'symfony/translation-contracts' => 
-    array (
-      'pretty_version' => 'v2.4.0',
-      'version' => '2.4.0.0',
-      'aliases' => 
-      array (
-      ),
-      'reference' => '95c812666f3e91db75385749fe219c5e494c7f95',
-    ),
-    'symfony/translation-implementation' => 
-    array (
-      'provided' => 
-      array (
-        0 => '2.3',
-      ),
-    ),
-  ),
 );

@@ -1,3 +1,11 @@
+# v2.2.0
+## 13-12-2025
+
+1. [](#bugfix)
+   - Resolve Carbon-library error ([#21](https://github.com/OleVik/grav-plugin-timeline/issues/21))
+2. [](#new)
+   - Bump Carbon-library to version compatible with PHP v8.2 (Carbon [#2728](https://github.com/briannesbitt/Carbon/issues/2728))
+
 # v2.2.0-rc.1
 ## 12-02-2023
 

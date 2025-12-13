@@ -19,7 +19,7 @@
     "php": ">=7.1.3",
     "bordeux/schema-org": "^1.0",
     "spatie/schema-org": "^3.3",
-    "nesbot/carbon": "^2.46"
+    "nesbot/carbon": "2.73.0"
   },
   "autoload": {
     "psr-4": {
