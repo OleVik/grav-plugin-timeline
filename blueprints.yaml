@@ -1,11 +1,12 @@
 name: Timeline
-version: 2.2.0
+version: 2.2.1
 description: Create and manage timelines in an ordered, hierarchical manner.
 icon: align-center
 author:
   name: Ole Vik
   email: git@olevik.net
-homepage: https://github.com/OleVik/grav-plugin-timeline
+homepage: https://github.com/OleVik/grav-plugin-timeline/
+demo: https://web.archive.org/web/20250826101242/https://olevik.net/staging/grav-skeleton-timeline/
 keywords: timeline, timelines
 bugs: https://github.com/OleVik/grav-plugin-timeline/issues
 docs: https://github.com/OleVik/grav-plugin-timeline/blob/master/README.md
